@@ -1,0 +1,20 @@
+# Created by .ignore support plugin (hsz.mobi)
+/*
+
+!/css
+/css/*
+
+!/img
+/img/*
+!/img/font-first.png
+!/img/font-second.png
+!/img/font-third.png
+!/img/head.jpg
+
+!/js
+/js/*
+!/js/jquery-2.1.4.min.js
+
+!/.gitignore
+!/index.html
+!/README.md
