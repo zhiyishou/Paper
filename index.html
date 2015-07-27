@@ -13,7 +13,7 @@
             width:100%;
             height:100%;
             overflow-x:hidden;
-            background: #ff6661;
+            background: #148afd;
         }
         .nav{
             width:auto;
@@ -106,8 +106,10 @@
             perspective: 800px;
             position: relative;
             background:#333;
+            overflow: hidden;
         }
         .nav-open + .container{
+            overflow: visible;
             transform-origin: 0 0;
             transform: translateX(600px) rotateY(15deg);
             transition-duration: 0.5s;
@@ -116,46 +118,87 @@
             transition-duration: 1s;
         }
 
-        .switch{
-            width:100px;
-            height: 100%;
-            background: #74c7ed;
-            float:left;
-            position: absolute;
-            top:0;
-            left:0;
-        }
         .content{
             background: white;
             height: 100%;
             margin-left:100px;
             overflow: auto;
             will-change:transform;
+            transition-property: transform;
+        }
+        .content:last-child{
+            color:red;
+            opacity: 0;
         }
         .article{
             padding:50px 50px 50px 150px;
         }
         .nav-open + .container .content{
             transition-duration: 0.5s;
-            transform: translate3d(-50px,0,-86px) rotateY(-3deg);
+            transform: translate3d(-50px,0,-86px) rotateY(-10deg);
             transform-origin: 0 50%;
+        }
+        .nav-open + .container .content:last-child{
+            display: none;
         }
         .nav-close + .container .content{
             transition-duration: 1s;
         }
-        .container .switch:hover + .content{
+        .container .switch:hover ~ .content{
             transition-duration: 0.2s;
             transform-origin: 0 50%;
-            transform: rotateY(15deg);
             overflow: hidden;
+        }
+        .container .switch:hover + .content{
+            transform: rotateY(15deg) translateY(-100%);
+            opacity: 0;
+        }
+        .container .switch:hover + .content + .content{
+            transform: rotateY(15deg) translateY(-100%);
+            opacity: 1;
+        }
+        .container .switch{
+            width:100px;
+            height: 100%;
+            background: #148afd;
+            float:left;
+            position: absolute;
+            top:0;
+            left:0;
+            text-align: center;
+            cursor:pointer;
+            overflow: hidden;
+        }
+        .container .switch:hover{
+            background: #1478ea;
         }
         .nav-open + .container .switch{
             transition-duration: 0.5s;
             transform: rotateY(60deg);
             transform-origin: 0 50%;
+            background: #1478ea;
         }
         .nav-close + .container .switch{
             transition-duration: 1s;
+        }
+        .container .switch div{
+            width: 200%;
+            font-size:20px;
+            font-family: "Microsoft YaHei","Lucida Grande",Verdana,Lucida,Arial,Helvetica,"宋体",sans-serif;
+            color:white;
+            position: absolute;
+            bottom:0;
+            transition-duration: 0.3s;
+            transition-timing-function: ease-in;
+        }
+        .container .switch:hover div{
+            transform: translateX(-100px);
+        }
+        .container .switch p{
+            width: 50%;
+            float:left;
+            box-sizing: border-box;
+            border-left:5px solid white;
         }
     </style>
 </head>
@@ -173,6 +216,10 @@
         </div>
         <div class="container">
             <div class="switch">
+                <div>
+                    <p>LIFE</p>
+                    <p>TECH</p>
+                </div>
             </div>
             <div class="content">
                 <div class="article">
@@ -197,6 +244,31 @@
                 　　海外方面，美联储主席耶伦公开表示今年加息是合适的，预计美国此次加息力度温和，不会像上次一次加息周期那样（2004-2006年）每次FOMC会议都会加息。美元指数前期涨幅已经较大反映了美联储加息的预期，预计加息前美元指数将再次走强，但升幅有限。目前主要发达经济体货币政策差别很大，美联储货币政策收紧，而欧元区和日本将继续维持超级宽松货币政策。从增长的方面看，美国未来两年增长前景明显好于欧元区和日本。这也是美元指数持续走强的主要原因。
 
                 　　国内方面，最近公布的中国7月制造业PMI初值下滑至48.2，表明制造业景气依然偏弱，其中生产、订单等指标全面下滑，而产成品库存上升意味着需求低迷。7月PMI价格指数大幅下滑，印证了7月生产资料价格降幅扩大，产能过剩下工业品价格通缩加剧。通胀方面，7月猪肉价格暴涨、服务价格上涨，可能推动消费物价上涨，但7月CPI仍将低于2%，PPI有望同比跌幅收窄。货币方面，上周公开市场连续两周净回笼，货币利率低位回升，流动性宽松程度减弱。
+                </div>
+            </div>
+            <div class="content">
+                <div class="article">
+                    和讯基金消息 今日（7月27日）午后沪指权重股持续萎靡，题材股全线崩溃，临近收盘沪指跌幅超过8%，创下近8年来最大单日跌幅。证券板块、高速公路板块跌停，前期充当护盘先锋的中国石油(601857,股吧)逼近跌停。截止收盘，上证指数报3725.56点，下跌345.35点，跌幅8.48%；深成指报12493.05点，下跌1025.46点，跌幅7.59%；创业板指报2683.4点，下跌214.38点，跌幅7.40%。
+
+                    　　对于近期市场，南方基金杨德龙对和讯基金表示，目前来看，A股市场已经结束了第一波急速超跌反弹，开始进入震荡反弹期，投资者情绪不够稳定，大盘指数反复震荡。值得注意的是，A股马上迎来中报披露期和三季报预披露期，中报业绩和三季报业绩的表现可能导致个股表现分化，业绩好坏将成为个股走势的决定因素。由于石油石化银行等大盘蓝筹股难有上涨空间，大盘指数可能很难大幅上涨，未来一段时间，宜“轻指数重个股”。操作策略上，建议挖掘一些在本轮下跌中被错杀的优质成长股，特别是具有行业领先地位和巨大发展空间的成长股；超配一些优质中小蓝筹股，比如汽车、医药、食品饮料、商贸零售等行业个股。未来一段时间，主题投资方面可关注国企改革、军工和京津冀板块等。
+
+                    　　海外方面，美联储主席耶伦公开表示今年加息是合适的，预计美国此次加息力度温和，不会像上次一次加息周期那样（2004-2006年）每次FOMC会议都会加息。美元指数前期涨幅已经较大反映了美联储加息的预期，预计加息前美元指数将再次走强，但升幅有限。目前主要发达经济体货币政策差别很大，美联储货币政策收紧，而欧元区和日本将继续维持超级宽松货币政策。从增长的方面看，美国未来两年增长前景明显好于欧元区和日本。这也是美元指数持续走强的主要原因。
+
+                    　　国内方面，最近公布的中国7月制造业PMI初值下滑至48.2，表明制造业景气依然偏弱，其中生产、订单等指标全面下滑，而产成品库存上升意味着需求低迷。7月PMI价格指数大幅下滑，印证了7月生产资料价格降幅扩大，产能过剩下工业品价格通缩加剧。通胀方面，7月猪肉价格暴涨、服务价格上涨，可能推动消费物价上涨，但7月CPI仍将低于2%，PPI有望同比跌幅收窄。货币方面，上周公开市场连续两周净回笼，货币利率低位回升，流动性宽松程度减弱。
+                    和讯基金消息 今日（7月27日）午后沪指权重股持续萎靡，题材股全线崩溃，临近收盘沪指跌幅超过8%，创下近8年来最大单日跌幅。证券板块、高速公路板块跌停，前期充当护盘先锋的中国石油(601857,股吧)逼近跌停。截止收盘，上证指数报3725.56点，下跌345.35点，跌幅8.48%；深成指报12493.05点，下跌1025.46点，跌幅7.59%；创业板指报2683.4点，下跌214.38点，跌幅7.40%。
+
+                    　　对于近期市场，南方基金杨德龙对和讯基金表示，目前来看，A股市场已经结束了第一波急速超跌反弹，开始进入震荡反弹期，投资者情绪不够稳定，大盘指数反复震荡。值得注意的是，A股马上迎来中报披露期和三季报预披露期，中报业绩和三季报业绩的表现可能导致个股表现分化，业绩好坏将成为个股走势的决定因素。由于石油石化银行等大盘蓝筹股难有上涨空间，大盘指数可能很难大幅上涨，未来一段时间，宜“轻指数重个股”。操作策略上，建议挖掘一些在本轮下跌中被错杀的优质成长股，特别是具有行业领先地位和巨大发展空间的成长股；超配一些优质中小蓝筹股，比如汽车、医药、食品饮料、商贸零售等行业个股。未来一段时间，主题投资方面可关注国企改革、军工和京津冀板块等。
+
+                    　　海外方面，美联储主席耶伦公开表示今年加息是合适的，预计美国此次加息力度温和，不会像上次一次加息周期那样（2004-2006年）每次FOMC会议都会加息。美元指数前期涨幅已经较大反映了美联储加息的预期，预计加息前美元指数将再次走强，但升幅有限。目前主要发达经济体货币政策差别很大，美联储货币政策收紧，而欧元区和日本将继续维持超级宽松货币政策。从增长的方面看，美国未来两年增长前景明显好于欧元区和日本。这也是美元指数持续走强的主要原因。
+
+                    　　国内方面，最近公布的中国7月制造业PMI初值下滑至48.2，表明制造业景气依然偏弱，其中生产、订单等指标全面下滑，而产成品库存上升意味着需求低迷。7月PMI价格指数大幅下滑，印证了7月生产资料价格降幅扩大，产能过剩下工业品价格通缩加剧。通胀方面，7月猪肉价格暴涨、服务价格上涨，可能推动消费物价上涨，但7月CPI仍将低于2%，PPI有望同比跌幅收窄。货币方面，上周公开市场连续两周净回笼，货币利率低位回升，流动性宽松程度减弱。
+                    和讯基金消息 今日（7月27日）午后沪指权重股持续萎靡，题材股全线崩溃，临近收盘沪指跌幅超过8%，创下近8年来最大单日跌幅。证券板块、高速公路板块跌停，前期充当护盘先锋的中国石油(601857,股吧)逼近跌停。截止收盘，上证指数报3725.56点，下跌345.35点，跌幅8.48%；深成指报12493.05点，下跌1025.46点，跌幅7.59%；创业板指报2683.4点，下跌214.38点，跌幅7.40%。
+
+                    　　对于近期市场，南方基金杨德龙对和讯基金表示，目前来看，A股市场已经结束了第一波急速超跌反弹，开始进入震荡反弹期，投资者情绪不够稳定，大盘指数反复震荡。值得注意的是，A股马上迎来中报披露期和三季报预披露期，中报业绩和三季报业绩的表现可能导致个股表现分化，业绩好坏将成为个股走势的决定因素。由于石油石化银行等大盘蓝筹股难有上涨空间，大盘指数可能很难大幅上涨，未来一段时间，宜“轻指数重个股”。操作策略上，建议挖掘一些在本轮下跌中被错杀的优质成长股，特别是具有行业领先地位和巨大发展空间的成长股；超配一些优质中小蓝筹股，比如汽车、医药、食品饮料、商贸零售等行业个股。未来一段时间，主题投资方面可关注国企改革、军工和京津冀板块等。
+
+                    　　海外方面，美联储主席耶伦公开表示今年加息是合适的，预计美国此次加息力度温和，不会像上次一次加息周期那样（2004-2006年）每次FOMC会议都会加息。美元指数前期涨幅已经较大反映了美联储加息的预期，预计加息前美元指数将再次走强，但升幅有限。目前主要发达经济体货币政策差别很大，美联储货币政策收紧，而欧元区和日本将继续维持超级宽松货币政策。从增长的方面看，美国未来两年增长前景明显好于欧元区和日本。这也是美元指数持续走强的主要原因。
+
+                    　　国内方面，最近公布的中国7月制造业PMI初值下滑至48.2，表明制造业景气依然偏弱，其中生产、订单等指标全面下滑，而产成品库存上升意味着需求低迷。7月PMI价格指数大幅下滑，印证了7月生产资料价格降幅扩大，产能过剩下工业品价格通缩加剧。通胀方面，7月猪肉价格暴涨、服务价格上涨，可能推动消费物价上涨，但7月CPI仍将低于2%，PPI有望同比跌幅收窄。货币方面，上周公开市场连续两周净回笼，货币利率低位回升，流动性宽松程度减弱。
                 </div>
             </div>
         </div>
