@@ -6,7 +6,7 @@ body{
     margin:0;
     width:100%;
     height:100%;
-    overflow-x:hidden;
+    overflow: hidden;
     background: #148afd;
 }
 .nav{
@@ -126,7 +126,6 @@ body{
     left:0;
     text-align: center;
     cursor:pointer;
-    overflow: hidden;
     will-change: transform;
     transition-duration: 0.2s;
 }
