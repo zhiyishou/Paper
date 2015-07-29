@@ -1,6 +1,7 @@
 html{
     width:100%;
     height:100%;
+    font-family: "Microsoft YaHei","Lucida Grande",Verdana,Lucida,Arial,Helvetica,"宋体",sans-serif;
 }
 body{
     margin:0;
@@ -120,14 +121,14 @@ body{
     width:100px;
     height: 100%;
     background: #148afd;
-    float:left;
     position: absolute;
     top:0;
     left:0;
     text-align: center;
     cursor:pointer;
     will-change: transform;
-    transition-duration: 0.2s;
+    transition-duration: 0.5s;
+    overflow: hidden;
 }
 /*hover then rotate with contents*/
 /*.container .switch:hover,.nav-open + .container .switch{*/
@@ -149,7 +150,6 @@ body{
 .container .switch div{
     width: 200%;
     font-size:20px;
-    font-family: "Microsoft YaHei","Lucida Grande",Verdana,Lucida,Arial,Helvetica,"宋体",sans-serif;
     color:white;
     position: absolute;
     bottom:0;
@@ -206,7 +206,6 @@ body{
     transform: rotateY(10deg);
 }
 .container .switch:hover + .contents .content{
-    overflow: hidden;
     transform: translateX(-100%);
 }
 .container.right-content .content {
@@ -216,6 +215,149 @@ body{
     transform: translateX(0);
 }
 
-.section{
+.article{
+    /*background: #e8aa74;*/
     padding:50px 10% 50px 10%;
+}
+
+
+@keyframes updown {
+    10%{
+        transform: rotateX(20deg)   scale(1.5,1.5);
+    }
+    20%{
+        transform: rotateX(-25deg);
+    }
+    30%{
+        transform: rotateX(30deg);
+    }
+    40%{
+        transform: rotateX(-35deg);
+    }
+    50%{
+        transform: rotateX(25deg);
+    }
+    60%{
+        transform: rotateX(-20deg);
+    }
+    70%{
+        transform: rotateX(15deg);
+    }
+    80%{
+        transform: rotateX(10deg);
+    }
+}
+@-webkit-keyframes updown {
+    70%{
+        transform: scale(1.4,1.4);
+    }
+    85%{
+        transform: rotateX(70deg);
+    }
+    90%{
+        transform: rotateX(-50deg);
+    }
+    95%{
+        transform: rotateX(30deg);
+    }
+    100%{
+        transform: rotateX(-10deg);
+    }
+
+}
+@-moz-keyframes updown{
+    10%{
+        transform: rotateX(10deg);
+    }
+    20%{
+        transform: rotateX(-15deg);
+    }
+    30%{
+        transform: rotateX(20deg);
+    }
+    40%{
+        transform: rotateX(-25deg);
+    }
+    50%{
+        transform: rotateX(15deg);
+    }
+    60%{
+        transform: rotateX(-10deg);
+    }
+    70%{
+        transform: rotateX(5deg);
+    }
+    80%{
+        transform: rotateX(0deg);
+    }
+}
+@-ms-keyframes updown{
+    10%{
+        transform: rotateX(10deg);
+    }
+    20%{
+        transform: rotateX(-15deg);
+    }
+    30%{
+        transform: rotateX(20deg);
+    }
+    40%{
+        transform: rotateX(-25deg);
+    }
+    50%{
+        transform: rotateX(15deg);
+    }
+    60%{
+        transform: rotateX(-10deg);
+    }
+    70%{
+        transform: rotateX(5deg);
+    }
+    80%{
+        transform: rotateX(0deg);
+    }
+}
+@-o-keyframes updown {
+    10%{
+        transform: rotateX(10deg);
+    }
+    20%{
+        transform: rotateX(-15deg);
+    }
+    30%{
+        transform: rotateX(20deg);
+    }
+    40%{
+        transform: rotateX(-25deg);
+    }
+    50%{
+        transform: rotateX(15deg);
+    }
+    60%{
+        transform: rotateX(-10deg);
+    }
+    70%{
+        transform: rotateX(5deg);
+    }
+    80%{
+        transform: rotateX(0deg);
+    }
+}
+
+@-webkit-keyframes crash {
+    80%{
+        transform: translateX(100px);
+    }
+    85%{
+        transform: translateX(0);
+    }
+    90%{
+        transform: translateX(40px);
+    }
+    95%{
+        transform: translateX(0px);
+    }
+    100%{
+        transform: translateX(20px);
+    }
 }
