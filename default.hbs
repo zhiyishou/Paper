@@ -20,17 +20,8 @@
     {{! Ghost outputs important style and meta data with this tag }}
     {{ghost_head}}
 </head>
-<body class="{{body_class}}">
-<aside class="nav nav-close" id="nav">
-    <div class="title">
-        <img class="title-first" src="{{asset "img/font-first.png"}}">
-        <img class="title-second" src="{{asset "img/font-second.png"}}">
-        <img class="title-third" src="{{asset "img/font-third.png"}}">
-    </div>
-    <div class="profile">
-        <img src="{{asset "img/head.jpg"}}">
-    </div>
-</aside>
+
+<body class="{{body_class}} ">
 {{! Everything else gets inserted here }}
 {{{body}}}
 
@@ -44,7 +35,7 @@
 <script src="{{asset "js/moment.js"}}"></script>
 
 <script>
-    var $container = $("#container");
+    var $body = $("#inner-body");
     $(function () {
         fixWidthOfNav();
     });
@@ -60,7 +51,7 @@
 
     $("#switch").on("click", function () {
         $(this).one("mouseleave", function () {
-            $container.toggleClass("right-middle");
+            $body.toggleClass("right-middle");
         });
     });
 
@@ -72,7 +63,7 @@
         e.preventDefault();
         var href = this.href;
         $("#left-bottom").load(href + " .content>*",function(res){
-            $container.addClass("left-bottom");
+            $body.addClass("left-bottom");
             window.history.pushState({type:"article",url:href},document.title,href);
 
         });
@@ -80,13 +71,13 @@
     window.addEventListener("popstate",function(e){
         switch (e.state.type){
             case "list":
-                $container.removeClass("left-bottom left-top");
+                $body.removeClass("left-bottom left-top");
                 break;
             case "article":
-                $container.addClass("left-top").addClass("left-bottom");
+                $body.addClass("left-top").addClass("left-bottom");
                 break;
             case "tag":
-                $conatiner.removeClass("left-bottom").addClass("left-top");
+                $body.removeClass("left-bottom").addClass("left-top");
                 break;
         }
         $("#left-bottom").find("audio,video").each(function(){
