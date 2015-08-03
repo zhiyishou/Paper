@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{! Document Settings }}
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    {{! Page Meta }}
+    <title>{{meta_title}}</title>
+    <meta name="description" content="{{meta_description}}"/>
+
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="shortcut icon" href="{{asset "favicon.ico"}}">
+
+    {{! Styles'n'Scripts }}
+    <link rel="stylesheet" type="text/less" href="{{asset "css/all.css"}}">
+
+    {{! Ghost outputs important style and meta data with this tag }}
+    {{ghost_head}}
+</head>
+<body class="{{body_class}}">
+<aside class="nav nav-close" id="nav">
+    <div class="title">
+        <img class="title-first" src="{{asset "img/font-first.png"}}">
+        <img class="title-second" src="{{asset "img/font-second.png"}}">
+        <img class="title-third" src="{{asset "img/font-third.png"}}">
+    </div>
+    <div class="profile">
+        <img src="{{asset "img/head.jpg"}}">
+    </div>
+</aside>
+{{! Everything else gets inserted here }}
+{{{body}}}
+
+
+{{! Ghost outputs important scripts and data with this tag }}
+{{ghost_foot}}
+
+{{! The main JavaScript file for Casper }}
+<script src="{{asset "js/jquery-2.1.4.min.js"}}"></script>
+<script src="{{asset "js/jquery.pjax.js"}}"></script>
+<script src="{{asset "js/moment.js"}}"></script>
+
+<script>
+    var $container = $("#container");
+    $(function () {
+        fixWidthOfNav();
+    });
+
+    $("#nav").on({
+        "mouseenter": function () {
+            $(this).removeClass("nav-close").addClass("nav-open");
+        },
+        "mouseleave": function () {
+            $(this).removeClass("nav-open").addClass("nav-close");
+        }
+    });
+
+    $("#switch").on("click", function () {
+        $(this).one("mouseleave", function () {
+            $container.toggleClass("right-middle");
+        });
+    });
+
+    $(window).resize(function () {
+        fixWidthOfNav();
+    });
+
+    $("#left-middle").on("click","a",function(e){
+        e.preventDefault();
+        var href = this.href;
+        $("#left-bottom").load(href + " .content>*",function(res){
+            $container.addClass("left-bottom");
+            window.history.pushState({type:"article",url:href},document.title,href);
+
+        });
+    });
+    window.addEventListener("popstate",function(e){
+        switch (e.state.type){
+            case "list":
+                $container.removeClass("left-bottom left-top");
+                break;
+            case "article":
+                $container.addClass("left-top").addClass("left-bottom");
+                break;
+            case "tag":
+                $conatiner.removeClass("left-bottom").addClass("left-top");
+                break;
+        }
+        $("#left-bottom").find("audio,video").each(function(){
+            this.pause();
+        })
+    });
+    window.history.replaceState({type:"list",url:window.location.href},document.title,window.location.href);
+
+
+
+
+    /*get cnblogs rss by Gfeed*/
+    $.getJSON("http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?&q=http://feed.cnblogs.com/blog/u/201524/rss&num=10",function(data){
+        if(data.responseStatus == 200){
+            var entries = data.responseData.feed.entries;
+            var str = "<h1>TECH BLOG</h1>";
+            var entry;
+            for(var i = 0; i < entries.length; i++){
+                entry = entries[i];
+                str += '<article class="post"><header class="post-header"><h3 class="post-title"><a href="'+ entry.link +'" target="_blank">'+ entry.title.split("-")[0] +'</a></h3></header><section class="post-excerpt"><p>'+ entry.contentSnippet +'<a class="read-more" target="_blank" href="'+ entry.link +'">&raquo;</a></p></section><footer class="post-meta"><time class="post-date" datetime="'+ entry.publishedDate +'">'+ moment(new Date(entry.publishedDate)).fromNow() +'</time></footer></article>';
+            }
+            $("#right-middle>.article").html(str);
+        }
+    });
+    function fixWidthOfNav() {
+        /**
+         * 修正浏览器bug,test.html中测试
+         * 如果子节点为img，其宽度auto，高度根据父节点高度百分比变化
+         * 父节点宽度为auto，在resize之后，父节点不会发生宽度变化，在所有浏览器中表现都不一样
+         * 只能用js去纠正
+         */
+        if ($("#nav").css("display") == "block") {
+            var title = $("#nav .title"),
+                    width = title.height() * 0.3;
+            title.css("width", width);
+            $(".container").css("margin-left", width);
+        }
+    }
+</script>
+</body>
+</html>

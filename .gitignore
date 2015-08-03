@@ -1,21 +1,38 @@
 # Created by .ignore support plugin (hsz.mobi)
 /*
 
-!/css
-/css/*
-!/css/index.css
+/assets
 
-!/img
-/img/*
-!/img/font-first.png
-!/img/font-second.png
-!/img/font-third.png
-!/img/head.jpg
+!/assets/css
+/assets/css/*
+!/assets/css/all.less
 
-!/js
-/js/*
-!/js/jquery-2.1.4.min.js
+!/assets/img
+/assets/img/*
+!/assets/img/font-first.png
+!/assets/img/font-second.png
+!/assets/img/font-third.png
+!/assets/img/head.jpg
 
+!/assets/js
+/assets/js/*
+!/assets/js/jquery-2.1.4.min.js
+
+!/partials
+/partials/*
+!/partials/loop.hbs
+!/partials/navigation.hbs
+!/partials/switch.hbs
+
+
+!/author.hbs
+!/default.hbs
+!/index.hbs
+!/page.hbs
+!/post.hbs
+!/tag.hbs
+
+!/LICENSE
 !/.gitignore
 !/index.html
 !/README.md
