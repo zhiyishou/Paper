@@ -64,11 +64,9 @@
         e.preventDefault();
         var href = this.href;
         $("#left-bottom").load(href + " #left-bottom>*",function(res){
-            setTimeout(function(){
-                Prism.highlightAll();
-                $body.addClass("left-bottom");
-                fixWidthOfNav();
-            },100);
+            Prism.highlightAll();
+            $body.removeClass("left-top left-middle").addClass("left-bottom");
+            fixWidthOfNav();
             window.history.pushState({type:"article",url:href},document.title,href);
         });
     });
@@ -114,7 +112,7 @@
 //    });
 
 
-    function fixWidthOfNav() {
+    function fixWidthOfNav(clear) {
         /**
          * 修正浏览器bug,test.html中测试
          * 如果子节点为img，其宽度auto，高度根据父节点高度百分比变化
