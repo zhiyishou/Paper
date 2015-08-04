@@ -16,6 +16,7 @@
 
     {{! Styles'n'Scripts }}
     <link rel="stylesheet" type="text/less" href="{{asset "css/all.css"}}">
+    <link rel="stylesheet" type="text/css" href="{{asset "css/prism.css"}}">
 
     {{! Ghost outputs important style and meta data with this tag }}
     {{ghost_head}}
@@ -31,7 +32,7 @@
 
 {{! The main JavaScript file for Casper }}
 <script src="{{asset "js/jquery-2.1.4.min.js"}}"></script>
-<script src="{{asset "js/jquery.pjax.js"}}"></script>
+<script src="{{asset "js/prism.js"}}"></script>
 <script src="{{asset "js/moment.js"}}"></script>
 
 <script>
@@ -62,46 +63,57 @@
     $("#left-middle").on("click","a",function(e){
         e.preventDefault();
         var href = this.href;
-        $("#left-bottom").load(href + " .content>*",function(res){
-            $body.addClass("left-bottom");
+        $("#left-bottom").load(href + " #left-bottom>*",function(res){
+            setTimeout(function(){
+                Prism.highlightAll();
+                $body.addClass("left-bottom");
+                fixWidthOfNav();
+            },100);
             window.history.pushState({type:"article",url:href},document.title,href);
-
         });
     });
     window.addEventListener("popstate",function(e){
         switch (e.state.type){
             case "list":
-                $body.removeClass("left-bottom left-top");
+                $body.removeClass("left-bottom left-top").addClass("left-middle");
                 break;
             case "article":
-                $body.addClass("left-top").addClass("left-bottom");
+                $body.removeClass("left-top left-middle").addClass("left-bottom");
                 break;
             case "tag":
-                $body.removeClass("left-bottom").addClass("left-top");
+                $body.removeClass("left-bottom left-middle").addClass("left-top");
                 break;
         }
+        fixWidthOfNav();
         $("#left-bottom").find("audio,video").each(function(){
             this.pause();
         })
     });
-    window.history.replaceState({type:"list",url:window.location.href},document.title,window.location.href);
+    if(window.location.pathname == "/"){
+        window.history.replaceState({type:"list",url:window.location.href},document.title,window.location.href);
+    }else{
+//        window.history.pushState({type:"list",url:window.location.origin},document.title,window.location.origin);
+//        window.history.replaceState({type:"article",url:window.location.href},document.title,window.location.href);
+    }
 
 
 
 
     /*get cnblogs rss by Gfeed*/
-    $.getJSON("http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?&q=http://feed.cnblogs.com/blog/u/201524/rss&num=10",function(data){
-        if(data.responseStatus == 200){
-            var entries = data.responseData.feed.entries;
-            var str = "<h1>TECH BLOG</h1>";
-            var entry;
-            for(var i = 0; i < entries.length; i++){
-                entry = entries[i];
-                str += '<article class="post"><header class="post-header"><h3 class="post-title"><a href="'+ entry.link +'" target="_blank">'+ entry.title.split("-")[0] +'</a></h3></header><section class="post-excerpt"><p>'+ entry.contentSnippet +'<a class="read-more" target="_blank" href="'+ entry.link +'">&raquo;</a></p></section><footer class="post-meta"><time class="post-date" datetime="'+ entry.publishedDate +'">'+ moment(new Date(entry.publishedDate)).fromNow() +'</time></footer></article>';
-            }
-            $("#right-middle>.article").html(str);
-        }
-    });
+//    $.getJSON("http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?&q=http://feed.cnblogs.com/blog/u/201524/rss&num=10",function(data){
+//        if(data.responseStatus == 200){
+//            var entries = data.responseData.feed.entries;
+//            var str = "<h1>TECH BLOG</h1>";
+//            var entry;
+//            for(var i = 0; i < entries.length; i++){
+//                entry = entries[i];
+//                str += '<article class="post"><header class="post-header"><h3 class="post-title"><a href="'+ entry.link +'" target="_blank">'+ entry.title.split("-")[0] +'</a></h3></header><section class="post-excerpt"><p>'+ entry.contentSnippet +'<a class="read-more" target="_blank" href="'+ entry.link +'">&raquo;</a></p></section><footer class="post-meta"><time class="post-date" datetime="'+ entry.publishedDate +'">'+ moment(new Date(entry.publishedDate)).fromNow() +'</time></footer></article>';
+//            }
+//            $("#right-middle>.article").html(str);
+//        }
+//    });
+
+
     function fixWidthOfNav() {
         /**
          * 修正浏览器bug,test.html中测试
@@ -109,7 +121,9 @@
          * 父节点宽度为auto，在resize之后，父节点不会发生宽度变化，在所有浏览器中表现都不一样
          * 只能用js去纠正
          */
-        if ($("#nav").css("display") == "block") {
+        if ($body.hasClass("left-bottom")) {
+            $(".container").css("margin-left", 0);
+        }else{
             var title = $("#nav .title"),
                     width = title.height() * 0.3;
             title.css("width", width);
