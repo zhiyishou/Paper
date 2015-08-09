@@ -323,13 +323,17 @@ a,a:visited,a:link{
         }
       }
 
-      & + a{
-        opacity: 0;
+      & ~ a{
+        .ty(-100%) !important;
       }
 
       div {
         transform: translateX(-100px);
       }
+    }
+
+    &:hover + a{
+      opacity: 0;
     }
 
     div {

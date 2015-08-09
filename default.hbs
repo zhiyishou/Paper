@@ -73,7 +73,7 @@
         doChanged();
     });
 
-    $("#left").on("click","a",function(e){
+    $("#left-middle").on("click","a",function(e){
         e.preventDefault();
         var href = this.href;
         $("#left-bottom").load(href + " #left-bottom>*",function(res){
@@ -86,6 +86,7 @@
 
     $("#home-btn").click(function(){
         $body.removeClass("left-bottom left-top right-middle").addClass("left-middle");
+        window.history.pushState({type:"list",url:window.location.origin},document.title,window.location.origin);
         doChanged();
         stopMedia();
     });
