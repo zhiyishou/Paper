@@ -22,7 +22,7 @@
 !/partials/loop.hbs
 !/partials/nav.hbs
 !/partials/switch.hbs
-
+!/partials/cnblog.hbs
 
 !/author.hbs
 !/default.hbs

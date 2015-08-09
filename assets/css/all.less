@@ -74,7 +74,7 @@
 html {
   width: 100%;
   height: 100%;
-  font-family: "Microsoft YaHei", "Lucida Grande", Verdana, Lucida, Arial, Helvetica, "宋体", sans-serif;
+  font-family: "Microsoft YaHei", "Merriweather","PT Serif","Lucida Grande", Georgia , Verdana, Lucida, Arial, Helvetica, "宋体", sans-serif;
   font-size: 18px;
 }
 
@@ -84,7 +84,11 @@ body {
   height: 100%;
   background: @main-blue;
   overflow: hidden;
+}
 
+a,a:visited,a:link{
+  color: @main-blue;
+  text-decoration: none;
 }
 
 #inner-body{
@@ -115,16 +119,12 @@ body {
   &.left-middle{
     .nav{
       .ty(0);
-      transition: transform 1s ease 1s;
-    }
-    .container{
-      transition: margin-left 1s;
+      transition: transform 1s ease 0s;
     }
     .left-content{
       .ty(0);
-      transition: transform 1s ease 1s;
+      transition: transform 1s ease 0s;
     }
-
   }
 
   &.left-bottom {
@@ -133,7 +133,7 @@ body {
     }
 
     .container{
-      transition: margin-left 1s ease 1s;
+      transition: margin-left 0s ease 1s;
     }
 
     #left-bottom,#left-middle{
@@ -346,6 +346,7 @@ body {
       width: 100%;
       height: 100%;
       overflow: auto;
+      box-sizing: border-box;
       background: @white;
       transition-duration: 0.5s;
       will-change: transform;
@@ -458,10 +459,6 @@ nav {
 
 }
 
-#right-middle .post-title {
-  font-size: 1.5em;
-}
-
 .post-list {
   h2 {
     font-size: 35px;
@@ -482,6 +479,6 @@ nav {
 
 .post-article article{
   width:80%;
-  max-width: 900px;
+  max-width: 700px;
   margin:0 auto;
 }
