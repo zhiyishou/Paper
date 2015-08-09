@@ -70,6 +70,7 @@
             window.history.pushState({type:"article",url:href},document.title,href);
         });
     });
+
     window.addEventListener("popstate",function(e){
         switch (e.state.type){
             case "list":
@@ -87,29 +88,9 @@
             this.pause();
         })
     });
-    if(window.location.pathname == "/"){
-        window.history.replaceState({type:"list",url:window.location.href},document.title,window.location.href);
-    }else{
-//        window.history.pushState({type:"list",url:window.location.origin},document.title,window.location.origin);
-//        window.history.replaceState({type:"article",url:window.location.href},document.title,window.location.href);
-    }
 
+    window.history.replaceState({type:"list",url:window.location.href},document.title,window.location.href);
 
-
-
-    /*get cnblogs rss by Gfeed*/
-//    $.getJSON("http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?&q=http://feed.cnblogs.com/blog/u/201524/rss&num=10",function(data){
-//        if(data.responseStatus == 200){
-//            var entries = data.responseData.feed.entries;
-//            var str = "<h1>TECH BLOG</h1>";
-//            var entry;
-//            for(var i = 0; i < entries.length; i++){
-//                entry = entries[i];
-//                str += '<article class="post"><header class="post-header"><h3 class="post-title"><a href="'+ entry.link +'" target="_blank">'+ entry.title.split("-")[0] +'</a></h3></header><section class="post-excerpt"><p>'+ entry.contentSnippet +'<a class="read-more" target="_blank" href="'+ entry.link +'">&raquo;</a></p></section><footer class="post-meta"><time class="post-date" datetime="'+ entry.publishedDate +'">'+ moment(new Date(entry.publishedDate)).fromNow() +'</time></footer></article>';
-//            }
-//            $("#right-middle>.article").html(str);
-//        }
-//    });
 
 
     function fixWidthOfNav(clear) {
