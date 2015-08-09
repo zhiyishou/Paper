@@ -114,6 +114,10 @@ a,a:visited,a:link{
     .content {
       transform: translateX(-100%);
     }
+
+    #home-btn{
+      .ty(0)
+    }
   }
 
   &.left-middle{
@@ -139,6 +143,10 @@ a,a:visited,a:link{
     #left-bottom,#left-middle{
       .ty(-100%);
     }
+
+    #home-btn{
+      .ty(0)
+    }
     //#left-bottom{
     //  transform: translateY(-100%);
     //}
@@ -146,6 +154,12 @@ a,a:visited,a:link{
     //  .ty(-100%);
     //  opacity: 0;
     //}
+  }
+
+  &.left-top{
+    #home-btn{
+      .ty(0)
+    }
   }
 }
 
@@ -307,6 +321,10 @@ a,a:visited,a:link{
         .content {
           transform: translateX(-100%);
         }
+      }
+
+      & + a{
+        opacity: 0;
       }
 
       div {
@@ -481,4 +499,21 @@ nav {
   width:80%;
   max-width: 700px;
   margin:0 auto;
+}
+
+#home-btn{
+  position: fixed;
+  right:50px;
+  top:0;
+  background: @main-blue;
+  color:@white;
+  padding:5px;
+  cursor: pointer;
+  text-align: center;
+  opacity: 1;
+  transition-duration: 0.2s;
+  .ty(-100%)
+}
+#home-btn:hover{
+  background: @dark-blue;
 }

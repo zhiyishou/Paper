@@ -36,9 +36,22 @@
 <script src="{{asset "js/moment.js"}}"></script>
 
 <script>
-    var $body = $("#inner-body");
+    var $body = $("#inner-body"),
+            $homeBtn = $("#home-btn");
     $(function () {
-        fixWidthOfNav();
+//        if(!$("#left-middle").html()){
+//            alert(1)
+//        }
+
+        if(!$("#left-middle").html().trim()){
+            $.get(window.location.origin,null,function(data){
+                var $data = $(data);
+
+                $("#left-middle").html($data.find("#left-middle").html());
+                $("#right-middle").html($data.find("#right-middle").html());
+            },"html");
+        }
+        doChanged();
     });
 
     $("#nav").on({
@@ -57,20 +70,26 @@
     });
 
     $(window).resize(function () {
-        fixWidthOfNav();
+        doChanged();
     });
 
-    $("#left-middle").on("click","a",function(e){
+    $("#left").on("click","a",function(e){
         e.preventDefault();
         var href = this.href;
         $("#left-bottom").load(href + " #left-bottom>*",function(res){
             Prism.highlightAll();
             $body.removeClass("left-top left-middle").addClass("left-bottom");
-            fixWidthOfNav();
+            doChanged();
             window.history.pushState({type:"article",url:href},document.title,href);
         });
     });
 
+    $("#home-btn").click(function(){
+        $body.removeClass("left-bottom left-top right-middle").addClass("left-middle");
+        doChanged();
+        stopMedia();
+    });
+    
     window.addEventListener("popstate",function(e){
         switch (e.state.type){
             case "list":
@@ -83,17 +102,26 @@
                 $body.removeClass("left-bottom left-middle").addClass("left-top");
                 break;
         }
-        fixWidthOfNav();
-        $("#left-bottom").find("audio,video").each(function(){
-            this.pause();
-        })
+        doChanged();
+        stopMedia();
     });
 
     window.history.replaceState({type:"list",url:window.location.href},document.title,window.location.href);
 
 
 
-    function fixWidthOfNav(clear) {
+    function doChanged(){
+        toggleHomeBtn();
+        fixWidthOfNav();
+    }
+    
+    function stopMedia(){
+        $("#left-bottom").find("audio,video").each(function(){
+            this.pause();
+        })
+    }
+
+    function fixWidthOfNav() {
         /**
          * 修正浏览器bug,test.html中测试
          * 如果子节点为img，其宽度auto，高度根据父节点高度百分比变化
@@ -108,6 +136,14 @@
             title.css("width", width);
             $(".container").css("margin-left", width);
         }
+    }
+
+    function toggleHomeBtn(){
+//        if(!$body[0].className || $body.hasClass("left-middle")){
+//            $homeBtn.fadeOut();
+//        }else{
+//            $homeBtn.fadeIn();
+//        }
     }
 </script>
 </body>
