@@ -37,7 +37,8 @@
 
 <script>
     var $body = $("#inner-body"),
-            $homeBtn = $("#home-btn");
+            $homeBtn = $("#home-btn"),
+            allClass = "left-top left-middle left-bottom right-middle";
     $(function () {
 //        if(!$("#left-middle").html()){
 //            alert(1)
@@ -54,12 +55,12 @@
         doChanged();
     });
 
-    $("#nav").on({
+    $("#aside").on({
         "mouseenter": function () {
-            $(this).removeClass("nav-close").addClass("nav-open");
+            $(this).removeClass("aside-close").addClass("aside-open");
         },
         "mouseleave": function () {
-            $(this).removeClass("nav-open").addClass("nav-close");
+            $(this).removeClass("aside-open").addClass("aside-close");
         }
     });
 
@@ -107,13 +108,26 @@
         stopMedia();
     });
 
-    window.history.replaceState({type:"list",url:window.location.href},document.title,window.location.href);
 
 
+
+    function initState(){
+        var path = window.location.pathname,
+                type;
+        if(path == "/"){
+            type = "list";
+        }else if(path.indexOf("/tag/") == 0){
+            type = "tag";
+        }else{
+            type = "article"
+        }
+        window.history.replaceState({type:type,url:window.location.href},document.title,window.location.href);
+    }
+    initState();
 
     function doChanged(){
         toggleHomeBtn();
-        fixWidthOfNav();
+        fixWidthOfAside();
     }
     
     function stopMedia(){
@@ -122,7 +136,7 @@
         })
     }
 
-    function fixWidthOfNav() {
+    function fixWidthOfAside() {
         /**
          * 修正浏览器bug,test.html中测试
          * 如果子节点为img，其宽度auto，高度根据父节点高度百分比变化
@@ -132,7 +146,7 @@
         if ($body.hasClass("left-bottom")) {
             $(".container").css("margin-left", 0);
         }else{
-            var title = $("#nav .title"),
+            var title = $("#aside .title"),
                     width = title.height() * 0.3;
             title.css("width", width);
             $(".container").css("margin-left", width);
