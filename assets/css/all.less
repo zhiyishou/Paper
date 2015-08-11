@@ -63,6 +63,24 @@
   }
 }
 
+@keyframes crash-right {
+  80% {
+    transform: translateX(-100px);
+  }
+  85% {
+    transform: translateX(0);
+  }
+  90% {
+    transform: translateX(-40px);
+  }
+  95% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-20px);
+  }
+}
+
 @keyframes crash-top {
   20%{
     .ty(-100%);
@@ -552,14 +570,14 @@ nav {
     .new-posts {
       float:left;
       &:hover{
-        -webkit-animation: updown 0.5s;
+        -webkit-animation: crash-left 0.5s;
       }
     }
 
     .older-posts {
       float:right;
       &:hover{
-        -webkit-animation: updown 0.5s;
+        -webkit-animation: crash-right 0.5s;
       }
     }
   }
@@ -582,10 +600,14 @@ aside{
       &.prev{
         float:right;
         text-align: right;
+
+        &:hover{
+          -webkit-animation: crash-right 0.5s;
+        }
       }
 
       &:hover{
-        -webkit-animation: updown 0.5s;
+        -webkit-animation: crash-left 0.5s;
       }
     }
   }
