@@ -476,11 +476,17 @@ footer {
       position:relative;
       color:@white;
 
+
+
       &:after{
         &:extend(.clearfix:after);
       }
       &:hover{
         -webkit-animation: updown 0.5s;
+      }
+
+      a:link,a:visited,a:visited{
+        color:@white;
       }
 
       .date-box{
@@ -495,17 +501,20 @@ footer {
       }
       .author{
         width:100%;
-        padding-left:30%;
-        padding-top:1px;
-
+        padding-left:25%;
+        font-size:15px;
         box-sizing: border-box;
-
 
         img{
           width:25%;
           float:left;
           margin-right:5%;
         }
+
+        &>div{
+          padding-top:1px;
+        }
+
       }
     }
   }

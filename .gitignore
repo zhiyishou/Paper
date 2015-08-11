@@ -23,6 +23,7 @@
 !/partials/nav.hbs
 !/partials/switch.hbs
 !/partials/cnblog.hbs
+!/partials/post.hbs
 
 !/author.hbs
 !/default.hbs

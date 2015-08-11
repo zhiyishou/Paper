@@ -1,0 +1,66 @@
+{{#post}}
+    <article class="{{post_class}}">
+        <header class="post-header">
+            <section class="post-meta">
+                <time class="post-date"
+                      datetime="{{date format='YYYY-MM-DD'}}">{{date timeago="true"}}</time>
+                {{#if tags}}
+                     ·
+                    {{#foreach tags}}
+                            <a href="{{url}}" title="{{name}}" action="tag">{{name}}</a>
+                    {{/foreach}}
+                {{/if}}
+            </section>
+            <h1 class="post-title">{{title}}</h1>
+        </header>
+
+        <section class="post-content">
+            {{content}}
+        </section>
+
+        <footer class="post-footer">
+
+            {{! Everything inside the #author tags pulls data from the author }}
+            {{#author}}
+                <section class="post-info">
+                    <a href="/about" action="article">
+                        <div class="date-box">
+                            <p>Published on</p>
+                            <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="YYYY.MM.DD"}}</time>
+                        </div>
+                        <div class="author">
+                            {{#if image}}
+                                <img src="{{image}}">
+                            {{/if}}
+                            <div>
+                                <h2>{{name}}</h2>
+                                {{#if bio}}<i>{{bio}}</i>{{/if}}
+                            </div>
+                        </div>
+                    </a>
+                </section>
+
+            {{/author}}
+
+        </footer>
+
+    </article>
+    <aside class="read-next">
+        {{#next_post}}
+            <a action="article" class="read-next-story {{#if image}}"  style="background-image: url({{image}}){{else}}no-cover{{/if}}"
+                    href="{{url}}">
+                <section class="post">
+                    <p>&larr; {{title}}</p>
+                </section>
+            </a>
+        {{/next_post}}
+        {{#prev_post}}
+            <a action="article" class="read-next-story prev {{#if image}}"  style="background-image: url({{image}}){{else}}no-cover{{/if}}"
+                    href="{{url}}">
+                <section class="post">
+                    <p>{{title}} &rarr;</p>
+                </section>
+            </a>
+        {{/prev_post}}
+    </aside>
+{{/post}}
