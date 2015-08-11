@@ -24,6 +24,7 @@
 !/partials/switch.hbs
 !/partials/cnblog.hbs
 !/partials/post.hbs
+!/partials/pagination.hbs
 
 !/author.hbs
 !/default.hbs
