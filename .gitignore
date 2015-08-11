@@ -16,6 +16,9 @@
 !/assets/js
 /assets/js/*
 !/assets/js/jquery-2.1.4.min.js
+!/assets/js/index.js
+!/assets/js/moment.js
+
 
 !/partials
 /partials/*
