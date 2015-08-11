@@ -30,3 +30,19 @@
     {{> "loop"}}
 
 </main>
+{{!< default}}
+<div id="inner-body" class="left-bottom">
+    {{> "nav"}}
+    <main class="container" id="container">
+        {{> "switch"}}
+        <a id="home-btn">HOME</a>
+        <div class="contents">
+            <!--left start-->
+            <div class="content post-list" id="left-top"></div>
+            <div class="content post-list" id="left-middle"></div>
+            <div class="content post-article" id="left-bottom"></div>
+            <!--left end-->
+            <div class="content post-list" id="right-middle"></div>
+        </div>
+    </main>
+</div>

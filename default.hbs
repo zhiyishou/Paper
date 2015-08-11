@@ -74,16 +74,41 @@
         doChanged();
     });
 
-    $("#left-middle").on("click","a",function(e){
+    $(".contents").on("click","a",function(e){
+        //for right-middle
+        var action = $(this).attr("action");
+
+        if(!action){
+            return;
+        }
+
         e.preventDefault();
         var href = this.href;
-        $("#left-bottom").load(href + " #left-bottom>*",function(res){
-            Prism.highlightAll();
-            $body.removeClass("left-top left-middle").addClass("left-bottom");
-            doChanged();
-            $(this).scrollTop(0);
-            window.history.pushState({type:"article",url:href},document.title,href);
-        });
+
+        switch($(this).attr("action")) {
+            case "article":
+                $("#left-bottom").load(href + " #left-bottom>*", function () {
+                    $body.removeClass("left-top left-middle").addClass("left-bottom");
+                    $(this).scrollTop(0);
+                    doChanged();
+                    window.history.pushState({type: action, url: href}, document.title, href);
+                });
+                break;
+            case "tag":
+                $("#left-top").load(href + " #left-top>*",function(){
+                    $body.removeClass("left-bottom left-middle").addClass("left-top");
+                    doChanged();
+                    window.history.pushState({type: action, url: href}, document.title, href);
+                });
+                break;
+            case "page":
+                $("#left-middle").load(href + " #left-middle>*", function(){
+                    $body.removeClass("left-top left-bottom");
+                    doChanged();
+                    window.history.pushState({type: action, url: href}, document.title, href);
+                });
+                break;
+        }
     });
 
     $("#home-btn").click(function(){
@@ -95,15 +120,23 @@
     
     window.addEventListener("popstate",function(e){
         switch (e.state.type){
-            case "list":
-                $body.removeClass("left-bottom left-top").addClass("left-middle");
-                break;
             case "article":
                 $body.removeClass("left-top left-middle").addClass("left-bottom");
                 break;
             case "tag":
                 $body.removeClass("left-bottom left-middle").addClass("left-top");
                 break;
+            case "list":
+                if(window.location.pathname.search(/^\/$||\/page\//) != 0){
+                    $body.removeClass("left-bottom left-top").addClass("left-middle");
+                    break;
+                }
+            case "page":
+                $("#left-middle").load(e.state.url + " #left-middle>*", function(){
+                    $body.removeClass("left-top left-bottom");
+                    doChanged();
+                    window.history.pushState({type: "page", url: window.location.href}, document.title, window.location.href);
+                });
         }
         doChanged();
         stopMedia();
@@ -119,6 +152,8 @@
             type = "list";
         }else if(path.indexOf("/tag/") == 0){
             type = "tag";
+        }else if(path.indexOf("/page/") == 0){
+            type = "page";
         }else{
             type = "article"
         }
@@ -127,7 +162,6 @@
     initState();
 
     function doChanged(){
-        toggleHomeBtn();
         fixWidthOfAside();
     }
     
@@ -145,21 +179,13 @@
          * 只能用js去纠正
          */
         if ($body.hasClass("left-bottom")) {
-            $(".container").css("margin-left", 0);
+            $("#container").css("margin-left", 0);
         }else{
             var title = $("#aside .title"),
                     width = title.height() * 0.3;
             title.css("width", width);
-            $(".container").css("margin-left", width);
+            $("#container").css("margin-left", width);
         }
-    }
-
-    function toggleHomeBtn(){
-//        if(!$body[0].className || $body.hasClass("left-middle")){
-//            $homeBtn.fadeOut();
-//        }else{
-//            $homeBtn.fadeIn();
-//        }
     }
 </script>
 </body>
