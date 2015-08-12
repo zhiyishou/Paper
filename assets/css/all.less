@@ -272,7 +272,7 @@ a,a:visited,a:link{
   & + .container {
     overflow: visible;
     transform-origin: 0 0;
-    transform: translateX(600px);
+    .tx(600px);
     transition-duration: 0.5s;
 
     .switch {
@@ -705,4 +705,98 @@ h1.post-title{
         transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
         -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
       }
+}
+
+@media screen and (max-width: 900px){
+  body{
+    overflow-y: auto;
+  }
+
+  .aside{
+    width:100%;
+    height: auto;
+    z-index: 1;
+    position: static;
+
+    &:hover{
+
+    }
+
+    &.aside-open{
+      .title-first {
+        .ty(100px);
+      }
+      .title-second {
+        .ty(30px);
+      }
+      .title-third {
+        .ty(70px);
+      }
+
+      .title{
+        padding-bottom:100px;
+      }
+
+      .profile{
+        position: static;
+      }
+    }
+
+    .title{
+      width: 100%;
+      height: auto;
+      float: none;
+
+      img{
+        width:30%;
+        height:auto;
+        position: static;
+        left: auto;
+        right: auto;
+        display: inline-block;
+      }
+    }
+
+    .profile{
+      height:500px;
+    }
+
+
+
+  }
+
+
+
+  .container{
+    margin-left:0;
+    height: auto;
+
+
+    .switch{
+      width:100%;
+      height:100px;
+
+      &:hover{
+        & ~ .contents{
+          transform: none;
+
+          & .content{
+            .tx(-100%);
+          }
+        }
+      }
+
+      &.nail{
+        position:fixed;
+
+        will-change:initial;
+      }
+    }
+
+    .contents{
+      height: auto;
+      margin-left:0;
+      margin-top:100px;
+    }
+  }
 }

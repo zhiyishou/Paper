@@ -10,6 +10,7 @@ $(function () {
         }, "html");
     }
     doChanged();
+    init();
 });
 
 $("#aside").on({
@@ -29,6 +30,15 @@ $("#switch").on("click", function () {
 
 $(window).resize(function () {
     doChanged();
+});
+
+$(window).scroll(function(){
+    if($("#switch").offset().top - $(document).scrollTop() <= 0){
+        $("#switch").addClass("nail");
+    }else {
+        $("#switch").removeClass("nail")
+    }
+    //console.log($("#switch").scrollTop())
 });
 
 $(".contents").on("click", "a", function (e) {
@@ -51,6 +61,7 @@ $(".contents").on("click", "a", function (e) {
                 doChanged();
                 window.history.pushState({type: action, url: href}, document.title, href);
                 maskLoding.hide();
+                initDuoshuo();
             });
             break;
         case "tag":
@@ -137,7 +148,7 @@ var maskLoding = (function () {
     }
 })();
 
-function initState() {
+function init() {
     var path = window.location.pathname,
         type;
     if (path == "/") {
@@ -147,11 +158,11 @@ function initState() {
     } else if (path.indexOf("/page/") == 0) {
         type = "page";
     } else {
-        type = "article"
+        type = "article";
+        initDuoshuo();
     }
     window.history.replaceState({type: type, url: window.location.href}, document.title, window.location.href);
 }
-initState();
 
 function doChanged() {
     fixWidthOfAside();
@@ -170,6 +181,11 @@ function fixWidthOfAside() {
      * 父节点宽度为auto，在resize之后，父节点不会发生宽度变化，在所有浏览器中表现都不一样
      * 只能用js去纠正
      */
+    //var change = "margin-left"
+    if($("body").width() < 900) {
+        return;
+    }
+
     if ($body.hasClass("left-bottom")) {
         $("#container").css("margin-left", 0);
     } else {
@@ -178,4 +194,11 @@ function fixWidthOfAside() {
         title.css("width", width);
         $("#container").css("margin-left", width);
     }
+}
+
+
+//duoshuo
+function initDuoshuo() {
+    var ds = document.getElementById("ds-thread");
+    DUOSHUO.EmbedThread(ds);
 }

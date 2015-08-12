@@ -42,37 +42,23 @@
 
             {{/author}}
             <!-- 多说评论框 start -->
-            <div class="ds-thread" data-thread-key="{{url}}" data-title="{{title}}" data-url="{{url}}"></div>
+            <div id="ds-thread" data-thread-key="{{url}}" data-title="{{title}}" data-url="{{url}}"></div>
+            <div id="comment-box" ></div>
             <!-- 多说评论框 end -->
-            <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-            <script type="text/javascript">
-                var duoshuoQuery = {short_name:"zhiyishou"};
-                (function() {
-                    var ds = document.createElement('script');
-                    ds.type = 'text/javascript';ds.async = true;
-                    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                    ds.charset = 'UTF-8';
-                    (document.getElementsByTagName('head')[0]
-                    || document.getElementsByTagName('body')[0]).appendChild(ds);
-                })();
-            </script>
-            <!-- 多说公共JS代码 end -->
 
         </footer>
 
     </article>
     <aside class="read-next">
         {{#next_post}}
-            <a action="article" class="read-next-story {{#if image}}"  style="background-image: url({{image}}){{else}}no-cover{{/if}}"
-                    href="{{url}}">
+            <a action="article" class="read-next-story" href="{{url}}">
                 <section class="post">
                     <p>&larr; {{title}}</p>
                 </section>
             </a>
         {{/next_post}}
         {{#prev_post}}
-            <a action="article" class="read-next-story prev {{#if image}}"  style="background-image: url({{image}}){{else}}no-cover{{/if}}"
-                    href="{{url}}">
+            <a action="article" class="read-next-story prev" href="{{url}}">
                 <section class="post">
                     <p>{{title}} &rarr;</p>
                 </section>
