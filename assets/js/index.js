@@ -1,6 +1,7 @@
 var $body = $("#inner-body");
 
 $(function () {
+    //load article list and cnblog list
     if (!$("#left-middle").html().trim()) {
         $.get(window.location.origin, null, function (data) {
             var $data = $(data);
@@ -18,7 +19,7 @@ $("#aside").on({
         $(this).removeClass("aside-close").addClass("aside-open");
     },
     "mouseleave": function () {
-        $(this).removeClass("aside-open").addClass("aside-close");
+        //$(this).removeClass("aside-open").addClass("aside-close");
     }
 });
 
@@ -36,7 +37,7 @@ $(window).scroll(function(){
     if($("#switch").offset().top - $(document).scrollTop() <= 0){
         $("#switch").addClass("nail");
     }else {
-        $("#switch").removeClass("nail")
+        $("#switch").removeClass("nail");
     }
     //console.log($("#switch").scrollTop())
 });
@@ -174,7 +175,7 @@ function stopMedia() {
     })
 }
 
-function fixWidthOfAside() {
+var fixWidthOfAside = (function() {
     /**
      * 修正浏览器bug,test.html中测试
      * 如果子节点为img，其宽度auto，高度根据父节点高度百分比变化
@@ -182,19 +183,29 @@ function fixWidthOfAside() {
      * 只能用js去纠正
      */
     //var change = "margin-left"
-    if($("body").width() < 900) {
-        return;
-    }
+    var isDeleted = false,
+        $title = $("#aside .title"),
+        $container = $("#container"),
+        width;
 
-    if ($body.hasClass("left-bottom")) {
-        $("#container").css("margin-left", 0);
-    } else {
-        var title = $("#aside .title"),
-            width = title.height() * 0.3;
-        title.css("width", width);
-        $("#container").css("margin-left", width);
+    return function() {
+        if ($("body").width() < 900) {
+            if(!isDeleted){
+                $container.css("margin-left","");
+                $title.width("");
+                isDeleted = true;
+            }
+        }else{
+            if ($body.hasClass("left-bottom")) {
+                $container.css("margin-left", 0);
+            } else {
+                width = $title.height() * 0.3;
+                $title.width(width);
+                $container.css("margin-left", width);
+            }
+        }
     }
-}
+})();
 
 
 //duoshuo
