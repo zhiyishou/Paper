@@ -1,4 +1,6 @@
-var $body = $("#inner-body");
+var $body = $("#inner-body"),
+    Type;
+    PhoneView = false;
 
 $(function () {
     //load article list and cnblog list
@@ -10,8 +12,8 @@ $(function () {
             $("#right-middle").html($data.find("#right-middle").html());
         }, "html");
     }
-    doChanged();
     init();
+    doChanged();
 });
 
 $("#aside").on({
@@ -19,7 +21,7 @@ $("#aside").on({
         $(this).removeClass("aside-close").addClass("aside-open");
     },
     "mouseleave": function () {
-        //$(this).removeClass("aside-open").addClass("aside-close");
+        $(this).removeClass("aside-open").addClass("aside-close");
     }
 });
 
@@ -30,16 +32,19 @@ $("#switch").on("click", function () {
 });
 
 $(window).resize(function () {
+    PhoneView = $("body").width() < 900;
     doChanged();
 });
 
-$(window).scroll(function(){
-    if($("#switch").offset().top - $(document).scrollTop() <= 0){
-        $("#switch").addClass("nail");
-    }else {
-        $("#switch").removeClass("nail");
+$(".content").scroll(function(){
+    if(!PhoneView) return;
+
+    if($(this).scrollTop() >= 10){
+        $("#aside").addClass("slideUp");
+    }else{
+        $("#aside").removeClass("slideUp");
     }
-    //console.log($("#switch").scrollTop())
+    fixWidthOfAside();
 });
 
 $(".contents").on("click", "a", function (e) {
@@ -54,7 +59,7 @@ $(".contents").on("click", "a", function (e) {
     var href = this.href;
 
     maskLoding.show();
-    switch ($(this).attr("action")) {
+    switch (Type = $(this).attr("action")) {
         case "article":
             $("#left-bottom").load(href + " #left-bottom>*", function () {
                 $body.removeClass("left-top left-middle").addClass("left-bottom");
@@ -81,18 +86,20 @@ $(".contents").on("click", "a", function (e) {
                 maskLoding.hide();
             });
             break;
+        default :
+            Type = "list";
     }
 });
 
 $("#home-btn").click(function () {
     $body.removeClass("left-bottom left-top right-middle").addClass("left-middle");
-    window.history.pushState({type: "list", url: window.location.origin}, document.title, window.location.origin);
+    window.history.pushState({type: Type = "list", url: window.location.origin}, document.title, window.location.origin);
     doChanged();
     stopMedia();
 });
 
 window.addEventListener("popstate", function (e) {
-    switch (e.state.type) {
+    switch (Type = e.state.type) {
         case "article":
             $body.removeClass("left-top left-middle").addClass("left-bottom");
             break;
@@ -150,19 +157,21 @@ var maskLoding = (function () {
 })();
 
 function init() {
-    var path = window.location.pathname,
-        type;
+    PhoneView = $("body").width() < 900;
+
+    var path = window.location.pathname;
+
     if (path == "/") {
-        type = "list";
+        Type = "list";
     } else if (path.indexOf("/tag/") == 0) {
-        type = "tag";
+        Type = "tag";
     } else if (path.indexOf("/page/") == 0) {
-        type = "page";
+        Type = "page";
     } else {
-        type = "article";
+        Type = "article";
         initDuoshuo();
     }
-    window.history.replaceState({type: type, url: window.location.href}, document.title, window.location.href);
+    window.history.replaceState({type: Type, url: window.location.href}, document.title, window.location.href);
 }
 
 function doChanged() {
@@ -182,26 +191,36 @@ var fixWidthOfAside = (function() {
      * 父节点宽度为auto，在resize之后，父节点不会发生宽度变化，在所有浏览器中表现都不一样
      * 只能用js去纠正
      */
-    //var change = "margin-left"
-    var isDeleted = false,
-        $title = $("#aside .title"),
+    var isPhoneViewBefore = $("body").width() < 900,
+        $aside = $("#aside"),
+        $title = $aside.find(".title"),
         $container = $("#container"),
         width;
 
     return function() {
-        if ($("body").width() < 900) {
-            if(!isDeleted){
-                $container.css("margin-left","");
-                $title.width("");
-                isDeleted = true;
-            }
+        //do the change when convert layout
+        if(isPhoneViewBefore && !PhoneView){
+            //phone to pc
+            $body.css("padding-top", "");
+            isPhoneViewBefore = PhoneView;
+        }else if(!isPhoneViewBefore && PhoneView){
+            //pc to phone
+            $body.css("padding-left", "");
+            $title.width("auto");
+            isPhoneViewBefore = PhoneView;
+        }
+
+        if (PhoneView) {
+            if(Type == "article") {return $body.css("padding-top",0)};
+            console.log($aside.hasClass("slideUp"))
+            $body.css("padding-top", $aside.hasClass("slideUp") ? 0 : $title.height());
         }else{
             if ($body.hasClass("left-bottom")) {
-                $container.css("margin-left", 0);
+                $body.css("padding-left",0);
             } else {
                 width = $title.height() * 0.3;
                 $title.width(width);
-                $container.css("margin-left", width);
+                $body.css("padding-left",width);
             }
         }
     }
