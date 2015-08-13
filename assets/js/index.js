@@ -81,6 +81,7 @@ $(".contents").on("click", "a", function (e) {
         case "page":
             $("#left-middle").load(href + " #left-middle>*", function () {
                 $body.removeClass("left-top left-bottom");
+                $(this).scrollTop(0);
                 doChanged();
                 window.history.pushState({type: action, url: href}, document.title, href);
                 maskLoding.hide();
