@@ -52,16 +52,12 @@
     <aside class="read-next">
         {{#next_post}}
             <a action="article" class="read-next-story" href="{{url}}">
-                <section class="post">
                     <p>&larr; {{title}}</p>
-                </section>
             </a>
         {{/next_post}}
         {{#prev_post}}
             <a action="article" class="read-next-story prev" href="{{url}}">
-                <section class="post">
-                    <p>{{title}} &rarr;</p>
-                </section>
+                <p>{{title}} &rarr;</p>
             </a>
         {{/prev_post}}
     </aside>

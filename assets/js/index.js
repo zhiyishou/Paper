@@ -1,6 +1,9 @@
 var $body = $("#inner-body"),
     Type;
-    PhoneView = false;
+    PhoneView = false,
+    supportHistory = !!(window.history.pushState && window.history.replaceState);
+
+//alert(!!navigator.userAgent.match(/mobile/i));
 
 $(function () {
     //load article list and cnblog list
@@ -16,19 +19,30 @@ $(function () {
     doChanged();
 });
 
+
+
+$("#aside").click(function(){
+    PhoneView && $(this).toggleClass("aside-open")
+});
+
 $("#aside").on({
     "mouseenter": function () {
-        $(this).removeClass("aside-close").addClass("aside-open");
+        !PhoneView && $(this).removeClass("aside-close").addClass("aside-open");
     },
     "mouseleave": function () {
-        $(this).removeClass("aside-open").addClass("aside-close");
+        !PhoneView && $(this).removeClass("aside-open").addClass("aside-close");
     }
 });
 
-$("#switch").on("click", function () {
-    $(this).one("mouseleave", function () {
+
+$("#switch").on("click",function(){
+    if(PhoneView){
         $body.toggleClass("right-middle");
-    });
+    }else{
+        $(this).one("mouseleave", function () {
+            $body.toggleClass("right-middle");
+        });
+    }
 });
 
 $(window).resize(function () {
@@ -51,7 +65,7 @@ $(".contents").on("click", "a", function (e) {
     //for right-middle
     var action = $(this).attr("action");
 
-    if (!action) {
+    if (!action || !supportHistory) {
         return;
     }
 
@@ -213,7 +227,7 @@ var fixWidthOfAside = (function() {
 
         if (PhoneView) {
             if(Type == "article") {return $body.css("padding-top",0)};
-            console.log($aside.hasClass("slideUp"))
+            console.log($aside.hasClass("slideUp"));
             $body.css("padding-top", $aside.hasClass("slideUp") ? 0 : $title.height());
         }else{
             if ($body.hasClass("left-bottom")) {
