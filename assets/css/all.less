@@ -762,10 +762,6 @@ h1.post-title {
     height: auto;
     z-index: 2;
 
-    &:hover {
-
-    }
-
     &.aside-open {
       padding-right: 0;
       height: 100%;
@@ -817,6 +813,11 @@ h1.post-title {
     .profile {
       width: 100%;
       height: 300px;
+
+      img{
+        width:100px;
+        height:100px;
+      }
     }
 
   }
@@ -923,20 +924,7 @@ h1.post-title {
       width: 100%;
       height: 50px;
       z-index: 1;
-
-      &:hover {
-        //& ~ .contents {
-        //  transform: none;
-        //
-        //  & .content {
-        //    .tx(-100%);
-        //  }
-        //}
-        //
-        //& > div {
-        //  .ty(-50%)
-        //}
-      }
+      will-change: initial;
 
       & > div {
         height: 200%;

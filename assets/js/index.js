@@ -22,7 +22,7 @@ $(function () {
 
 
 $("#aside").click(function(){
-    PhoneView && $(this).toggleClass("aside-open")
+    PhoneView && $(this).toggleClass("aside-open");
 });
 
 $("#aside").on({
