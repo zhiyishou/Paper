@@ -118,6 +118,173 @@ $(".contents,.profile").on("click", "a", function (e) {
     }
 });
 
+//img.parent().width()-img.width()-img.position().left+10+"px"
+
+(function(){
+    var $tag = $("<a class='show-original-img white'>原图</a>"),
+        img = document.createElement("img"),
+        $img = $(img),
+        $oriBox = $("<div id='original-box'><div id='masker-close'>&times;</div></div>"),
+        $close = $oriBox.children("#masker-close"),
+        //store original image data for zoom smaller to recovery the location
+        originalData = {
+            ratio: 1,
+            width: 0,
+            height: 0,
+            top: 0,
+            left: 0,
+            //for limit mousemove event
+            isLock: true
+        },
+        url;
+
+    //$oriBox.append($close);
+
+    $(".contents")
+        .on("mouseenter",".post-content img",function(){
+            var $this = $(this);
+
+            url = this.src.replace(/-resize$/,"");
+            $this.parent().css("position","relative");
+            originalData.ratio = $this.width() / $this.height();
+
+            $tag.css({
+                "top": $this.position().top,
+                "right": $this.parent().width() - $this.width() - $this.position().left
+            });
+
+            $this.after($tag);
+        }).on("mouseleave",".post-content img",function(e){
+            if(e.relatedTarget == $tag[0]){
+                return;
+            }
+            $tag.remove();
+        });
+
+    $tag[0].onclick = function(){
+        //do it before get width because the scroll bar
+        if(PhoneView){
+            $body.css("overflow","hidden");
+        }
+
+        var $body = $("body"),
+            width = $body.width(),
+            height = $body.height();
+
+
+
+        maskLoding.show();
+        $oriBox.prepend($img);
+        img.src = url;
+
+        if(originalData.ratio >  width / height){
+            originalData.width = width;
+            originalData.height = width / originalData.ratio;
+            originalData.top = (height - originalData.height)/2;
+            originalData.left = 0;
+        }else{
+            originalData.width =  height * originalData.ratio;
+            originalData.height = height;
+            originalData.top = 0;
+            originalData.left = (width - originalData.width)/2;
+        }
+
+        $img.css({
+            height: originalData.height,
+            width: originalData.width,
+            top: originalData.top,
+            left: originalData.left
+        });
+
+        //for sync showing image and masker
+        //so we will get a better transition
+        setTimeout(function(){
+            $body.append($oriBox);
+        },300);
+    };
+
+
+    //see "jquery remove() and Event" with bug tag in evernote
+    img.onload = function(){
+        $("#loading").fadeOut();
+    };
+
+    $close[0].onclick = function(){
+        if(PhoneView){
+            $body.css("overflow","");
+        }
+
+        $oriBox.remove();
+        maskLoding.hide();
+    };
+
+    img.onmousewheel = img.dommousescroll = debounce(mousewheel,20);
+    img.addEventListener("DOMMouseScroll", img.onmousewheel);
+
+    function mousewheel(e) {
+        var temp;
+        if (!$img[0].complete) return;
+        if (e.detail ? e.detail < 0 : e.wheelDelta > 0) {
+            $img.css({
+                "width": function (index, value) {
+                    return parseInt(value) * 1.1;
+                }, "height": function (index, value) {
+                    return parseInt(value) * 1.1;
+                }, "left": function (index, value) {
+                    return parseInt(value) - (e.offsetX || e.layerX) * 0.1;
+                }, "top": function (index, value) {
+                    return parseInt(value) - (e.offsetY || e.layerY) * 0.1;
+                }
+            });
+        } else {
+            $img.css({
+                "width": function (index, value) {
+                    value = parseInt(value);
+                    temp = value / 1.1;
+                    return value > originalData.width && temp > originalData.width ? temp : (temp = false, originalData.width);
+                }, "height": function (index, value) {
+                    value = parseInt(value);
+                    temp = value / 1.1;
+                    return value > originalData.height && temp > originalData.height ? temp : (temp = false, originalData.height);
+                }, "left": function (index, value) {
+                    return temp === false ? ($oriBox.width() - originalData.width) / 2 : parseInt(value) + (e.offsetX || e.layerX) / 11;
+                }, "top": function (index, value) {
+                    return temp === false ? ($oriBox.height() - originalData.height) / 2 : parseInt(value) + (e.offsetY || e.layerY) / 11;
+                }
+            })
+        }
+    }
+
+    //open the limit of draging
+    img.ondragstart = function (e) {
+        e.returnValue = false;
+        return false;
+    };
+    img.onmousedown = function (e) {
+        if (!img.complete) return;
+        originalData.isLock = false;
+        originalData.left = e.clientX;
+        originalData.top = e.clientY;
+    };
+    img.onmousemove = debounce(function (e) {
+        e.preventDefault();
+        if (!img.complete || originalData.isLock) return;
+        $img.css({
+            left: parseInt($img.css("left")) + e.clientX - originalData.left,
+            top: parseInt($img.css("top")) + e.clientY - originalData.top
+        });
+        originalData.left = e.clientX;
+        originalData.top = e.clientY;
+    }, 20);
+    img.onmouseup = function () {
+        originalData.isLock = true;
+    };
+    img.onmouseout = function (e) {
+        originalData.isLock = true;
+    }
+})();
+
+
 $("#home-btn").click(function () {
     $body.removeClass("left-bottom left-top right-middle").addClass("left-middle");
     window.history.pushState({type: Type = "list", url: window.location.origin}, document.title, window.location.origin);
@@ -155,30 +322,38 @@ window.addEventListener("popstate", function (e) {
 });
 
 
-var masker = (function () {
+var masker = (function (noTransition) {
     var $mask = $("#mask-layer");
 
     return {
         show: function () {
-            $mask.fadeIn();
+            if(noTransition){
+                $mask.show();
+            }else{
+                $mask.fadeIn();
+            }
         },
         hide: function () {
-            $mask.fadeOut();
+            if(noTransition){
+                $mask.hide();
+            }else{
+                $mask.fadeOut();
+            }
         }
     }
 })();
 
-var maskLoding = (function () {
+var maskLoding = (function (noTransition) {
     var $loading = $("#loading");
 
     return {
         show: function () {
             $loading.fadeIn();
-            masker.show();
+            masker.show(noTransition);
         },
         hide: function () {
             $loading.fadeOut();
-            masker.hide();
+            masker.hide(noTransition);
         }
     }
 })();
@@ -252,6 +427,19 @@ var fixWidthOfAside = (function() {
     }
 })();
 
+
+function debounce(func,delay){
+    var lasttime = new Date();
+
+    return function(){
+        var now = new Date();
+        if(now - lasttime > delay){
+            lasttime = now;
+            func.apply(this,arguments);
+        }
+
+    }
+}
 
 //duoshuo
 function initDuoshuo() {
