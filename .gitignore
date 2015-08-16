@@ -8,10 +8,17 @@
 
 !/assets/img
 /assets/img/*
-!/assets/img/font-first.png
-!/assets/img/font-second.png
-!/assets/img/font-third.png
+!/assets/img/font_first.png
+!/assets/img/font_second.png
+!/assets/img/font_third.png
 !/assets/img/head.jpg
+!/assets/img/life_biking.png
+!/assets/img/life_climbing.png
+!/assets/img/life_running.png
+!/assets/img/tech_coding.png
+!/assets/img/tech_design.png
+!/assets/img/tech_explore.png
+!/assets/img/contact.png
 
 !/assets/js
 /assets/js/*
