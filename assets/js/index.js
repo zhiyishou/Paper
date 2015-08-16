@@ -1,5 +1,5 @@
 var $body = $("#inner-body"),
-    Type;
+    Type,
     PhoneView = false,
     supportHistory = !!(window.history.pushState && window.history.replaceState);
 
@@ -20,17 +20,23 @@ $(function () {
 });
 
 
-
-$("#aside").click(function(){
-    PhoneView && $(this).toggleClass("aside-open");
-});
-
 $("#aside").on({
     "mouseenter": function () {
         !PhoneView && $(this).removeClass("aside-close").addClass("aside-open");
     },
     "mouseleave": function () {
         !PhoneView && $(this).removeClass("aside-open").addClass("aside-close");
+    },
+    "click": function(e){
+        var $this = $(this);
+
+        if(PhoneView) {
+            if (e.target.className == "close") {
+                $this.removeClass("aside-open").addClass("aside-close");
+            }else if(!$this.hasClass("aside-open")){
+                $this.removeClass("aside-close").addClass("aside-open");
+            }
+        }
     }
 });
 
@@ -61,12 +67,16 @@ $(".content").scroll(function(){
     fixWidthOfAside();
 });
 
-$(".contents").on("click", "a", function (e) {
-    //for right-middle
+$(".contents,.profile").on("click", "a", function (e) {
+    //for normal a link
     var action = $(this).attr("action");
-
     if (!action || !supportHistory) {
         return;
+    }
+
+    if (PhoneView && this.id == "readmore"){
+        $("#aside").removeClass("aside-open").addClass("aside-close");
+        e.stopPropagation();
     }
 
     e.preventDefault();
@@ -87,6 +97,7 @@ $(".contents").on("click", "a", function (e) {
         case "tag":
             $("#left-top").load(href + " #left-top>*", function () {
                 $body.removeClass("left-bottom left-middle").addClass("left-top");
+                PhoneView && $(this).scrollTop(0);
                 doChanged();
                 window.history.pushState({type: action, url: href}, document.title, href);
                 maskLoding.hide();
@@ -103,6 +114,7 @@ $(".contents").on("click", "a", function (e) {
             break;
         default :
             Type = "list";
+            PhoneView && $("#left-middle").scrollTop(0);
     }
 });
 
@@ -227,7 +239,6 @@ var fixWidthOfAside = (function() {
 
         if (PhoneView) {
             if(Type == "article") {return $body.css("padding-top",0)};
-            console.log($aside.hasClass("slideUp"));
             $body.css("padding-top", $aside.hasClass("slideUp") ? 0 : $title.height());
         }else{
             if ($body.hasClass("left-bottom")) {
