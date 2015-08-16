@@ -7,12 +7,13 @@ var $body = $("#inner-body"),
 
 $(function () {
     //load article list and cnblog list
+    alert(!$("#left-middle").html().trim())
     if (!$("#left-middle").html().trim()) {
         $.get(window.location.origin, null, function (data) {
             var $data = $(data);
-
-            $("#left-middle").html($data.find("#left-middle").html());
-            $("#right-middle").html($data.find("#right-middle").html());
+            
+            $("#left-middle").replaceWith($data.find("#left-middle"));
+            $("#right-middle").replaceWith($data.find("#right-middle"));
         }, "html");
     }
     init();

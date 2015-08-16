@@ -15,6 +15,11 @@
   top: @top;
 }
 
+.ai(@value){
+  -webkit-animation: @value;
+  animation: @value;
+}
+
 .tf(@value){
   -webkit-transform: @value;
   transform: @value;
@@ -182,10 +187,6 @@ a.white, a.white:link, a.white:visited, {
     }
   }
 
-  &.left-middle {
-
-  }
-
   &.left-bottom {
     .aside {
       .ty(100%);
@@ -207,6 +208,10 @@ a.white, a.white:link, a.white:visited, {
       .ty(100%);
     }
 
+    #home-btn {
+      .ty(0);
+      transition: transform 0.2s ease 1s;
+    }
   }
 }
 
@@ -315,6 +320,10 @@ a.white, a.white:link, a.white:visited, {
       height: 150px;
       border: 5px solid @dark-white;
       border-radius: 750px;
+    }
+
+    & > div:after{
+      &:extend(.clearfix:after);
     }
 
     hr {
@@ -476,15 +485,15 @@ a.white, a.white:link, a.white:visited, {
       background: @dark-blue;
 
       & ~ .contents {
-        .tf(transform: rotateY(10deg));
+        .tf(rotateY(10deg));
 
         .content {
-          .tf(transform: translateX(-100%));
+          .tf(translateX(-100%));
         }
       }
 
       div {
-        .tf(transform: translateX(-100px));
+        .tf(translateX(-100px));
       }
     }
 
@@ -601,7 +610,7 @@ header {
         animation-timing-function: @fastEnd;
 
         &:hover {
-          animation: crash-left 0.7s;
+          .ai(crash-left 0.7s);
         }
       }
     }
@@ -665,7 +674,7 @@ footer {
       animation-timing-function: @fastEnd;
 
       &:hover {
-        -webkit-animation: updown 0.5s;
+        .ai(updown 0.5s);
       }
     }
 
@@ -691,7 +700,7 @@ footer {
         &:extend(.clearfix:after);
       }
       &:hover {
-        -webkit-animation: updown 0.5s;
+        .ai(updown 0.5s);
       }
 
       .date-box {
@@ -748,14 +757,14 @@ nav {
     .newer-posts {
       left:0;
       &:hover {
-        -webkit-animation: crash-left 0.5s;
+        .ai(crash-left 0.5s);
       }
     }
 
     .older-posts {
       right:0;
       &:hover {
-        -webkit-animation: crash-right 0.5s;
+        .ai(crash-right 0.5s);
       }
     }
   }
@@ -779,12 +788,12 @@ aside {
         text-align: right;
 
         &:hover {
-          -webkit-animation: crash-right 0.5s;
+          .ai(crash-right 0.5s);
         }
       }
 
       &:hover {
-        -webkit-animation: crash-left 0.5s;
+        .ai(crash-left 0.5s);
       }
     }
   }
@@ -858,20 +867,19 @@ h1.post-title {
   margin-top: -30px;
   perspective: 120px;
   background-color: @main-blue;
-  -webkit-animation: rotateplane 1.2s infinite ease-in-out;
-  animation: rotateplane 1.2s infinite ease-in-out;
+  .ai(rotateplane 1.2s infinite ease-in-out);
   z-index: 101;
 }
 
 @-webkit-keyframes rotateplane {
   0% {
-    -webkit-transform: perspective(120px)
+    -webkit-transform: perspective(120px);
   }
   50% {
-    -webkit-transform: perspective(120px) rotateY(180deg)
+    -webkit-transform: perspective(120px) rotateY(180deg);
   }
   100% {
-    -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg)
+    -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
   }
 }
 
