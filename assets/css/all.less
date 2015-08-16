@@ -5,6 +5,7 @@
 @dark-white: #eeeeee;
 @main-red: #ff003f;
 @dark-red: #ec0038;
+@main-gray: #cdcdcd;
 @white: #ffffff;
 @black: #333333;
 @fastEnd: cubic-bezier(.96, .04, .95, .45);
@@ -14,12 +15,17 @@
   top: @top;
 }
 
+.tf(@value){
+  -webkit-transform: @value;
+  transform: @value;
+}
+
 .tx(@offset) {
-  transform: translateX(@offset);
+  .tf(translateX(@offset));
 }
 
 .ty(@offset) {
-  transform: translateY(@offset);
+  .tf(translateY(@offset));
 }
 
 .clearfix:after {
@@ -159,20 +165,20 @@ a.white, a.white:link, a.white:visited, {
       &:hover {
         background: @dark-red;
         div {
-          transform: translateX(0px);
+          .tf(translateX(0px));
         }
         & ~ .contents .content {
-          transform: translateX(0px);
+          .tf(translateX(0px));
         }
       }
 
       div {
-        transform: translateX(-100px);
+        .tf(translateX(-100px));
       }
     }
 
     .content {
-      transform: translateX(-100%);
+      .tf(translateX(-100%));
     }
   }
 
@@ -218,6 +224,21 @@ a.white, a.white:link, a.white:visited, {
 
   pre, canvas, audio, video {
     max-width: 100%;
+  }
+
+  p code{
+    background: @main-gray;
+  }
+
+  code,pre{
+    font: inherit;
+  }
+
+  hr{
+    width: 80%;
+    border: 1px solid @main-gray;
+    margin-top:1em;
+    margin-bottom:2em;
   }
 
   blockquote {
@@ -402,25 +423,25 @@ a.white, a.white:link, a.white:visited, {
 
     .switch {
       transition-duration: 0.2s;
-      transform: rotateY(60deg);
+      .tf(rotateY(60deg));
       transform-origin: 0 50%;
       background: @dark-blue;
     }
 
     .contents {
-      transform: translate3d(-50px, 0, -86px) rotateY(-10deg);
+      .tf(translate3d(-50px, 0, -86px) rotateY(-10deg));
     }
   }
 
   .title {
     .title-first {
-      transform: translateX(100px);
+      .tf(translateX(100px));
     }
     .title-second {
-      transform: translateX(30px);
+      .tf(translateX(30px));
     }
     .title-third {
-      transform: translateX(70px);
+      .tf(translateX(70px));
     }
   }
 
@@ -455,15 +476,15 @@ a.white, a.white:link, a.white:visited, {
       background: @dark-blue;
 
       & ~ .contents {
-        transform: rotateY(10deg);
+        .tf(transform: rotateY(10deg));
 
         .content {
-          transform: translateX(-100%);
+          .tf(transform: translateX(-100%));
         }
       }
 
       div {
-        transform: translateX(-100px);
+        .tf(transform: translateX(-100px));
       }
     }
 
