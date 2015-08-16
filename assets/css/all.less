@@ -690,13 +690,13 @@ footer {
         box-sizing: border-box;
 
         img {
-          width: 25%;
+          width: 30%;
           float: left;
           margin-right: 5%;
         }
 
         & > div {
-          padding-top: 1px;
+          overflow: hidden;
         }
 
       }
@@ -709,6 +709,7 @@ nav {
   &.pagination {
     text-align: center;
     margin-top: 100px;
+    margin-bottom: 50px;
     position: relative;
 
     &:after {
@@ -720,20 +721,18 @@ nav {
       background: #333333;
       color: #eeeeee;
       text-decoration: none;
+      position:absolute;
     }
 
-    span {
-    }
-
-    .new-posts {
-      float: left;
+    .newer-posts {
+      left:0;
       &:hover {
         -webkit-animation: crash-left 0.5s;
       }
     }
 
     .older-posts {
-      float: right;
+      right:0;
       &:hover {
         -webkit-animation: crash-right 0.5s;
       }
@@ -986,6 +985,7 @@ h1.post-title {
       }
       .contents {
         top: 50px;
+        padding-bottom: 50px;
       }
       .content {
         display: none;
@@ -1017,6 +1017,7 @@ h1.post-title {
       }
       .contents {
         top: 50px;
+        padding-bottom: 50px;
       }
       .content {
         display: none;

@@ -44,6 +44,7 @@ $("#aside").on({
 $("#switch").on("click",function(){
     if(PhoneView){
         $body.toggleClass("right-middle");
+        $("body").scrollTop(0);
     }else{
         $(this).one("mouseleave", function () {
             $body.toggleClass("right-middle");
@@ -87,7 +88,14 @@ $(".contents,.profile").on("click", "a", function (e) {
         case "article":
             $("#left-bottom").load(href + " #left-bottom>*", function () {
                 $body.removeClass("left-top left-middle").addClass("left-bottom");
-                $(this).scrollTop(0);
+
+                if(PhoneView){
+                    $("body").scrollTop(0);
+                    playMedia();
+                }else{
+                    $(this).scrollTop(0);
+                }
+
                 doChanged();
                 window.history.pushState({type: action, url: href}, document.title, href);
                 maskLoding.hide();
@@ -97,7 +105,7 @@ $(".contents,.profile").on("click", "a", function (e) {
         case "tag":
             $("#left-top").load(href + " #left-top>*", function () {
                 $body.removeClass("left-bottom left-middle").addClass("left-top");
-                PhoneView && $(this).scrollTop(0);
+                PhoneView && $("body").scrollTop(0);
                 doChanged();
                 window.history.pushState({type: action, url: href}, document.title, href);
                 maskLoding.hide();
@@ -106,7 +114,7 @@ $(".contents,.profile").on("click", "a", function (e) {
         case "page":
             $("#left-middle").load(href + " #left-middle>*", function () {
                 $body.removeClass("left-top left-bottom");
-                $(this).scrollTop(0);
+                PhoneView ? $("body").scrollTop(0) : $(this).scrollTop(0);
                 doChanged();
                 window.history.pushState({type: action, url: href}, document.title, href);
                 maskLoding.hide();
@@ -114,12 +122,12 @@ $(".contents,.profile").on("click", "a", function (e) {
             break;
         default :
             Type = "list";
-            PhoneView && $("#left-middle").scrollTop(0);
+            PhoneView && $("body").scrollTop(0);
     }
 });
 
-//img.parent().width()-img.width()-img.position().left+10+"px"
 
+//zoom for picture
 (function(){
     var $tag = $("<a class='show-original-img white'>原图</a>"),
         img = document.createElement("img"),
@@ -162,17 +170,17 @@ $(".contents,.profile").on("click", "a", function (e) {
         });
 
     $tag[0].onclick = function(){
+        var $body = $("body"),
+            width,
+            height;
+
         //do it before get width because the scroll bar
         if(PhoneView){
             $body.css("overflow","hidden");
         }
 
-        var $body = $("body"),
-            width = $body.width(),
-            height = $body.height();
-
-
-
+        width = $body.width();
+        height = $body.height();
         maskLoding.show();
         $oriBox.prepend($img);
         img.src = url;
@@ -211,7 +219,7 @@ $(".contents,.profile").on("click", "a", function (e) {
 
     $close[0].onclick = function(){
         if(PhoneView){
-            $body.css("overflow","");
+            $("body").css("overflow","");
         }
 
         $oriBox.remove();
@@ -371,6 +379,7 @@ function init() {
         Type = "page";
     } else {
         Type = "article";
+        playMedia();
         initDuoshuo();
     }
     window.history.replaceState({type: Type, url: window.location.href}, document.title, window.location.href);
@@ -383,6 +392,14 @@ function doChanged() {
 function stopMedia() {
     $("#left-bottom").find("audio,video").each(function () {
         this.pause();
+    })
+}
+
+function playMedia(){
+    $("#left-bottom").find("audio[autoplay=autoplay]").each(function(){
+        setTimeout(function(){
+            this.play();
+        },1000)
     })
 }
 
