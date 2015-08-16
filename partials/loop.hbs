@@ -14,7 +14,7 @@
     </section>
     <footer class="post-meta">
         {{#foreach tags}}
-            <a href="{{url}}" title="{{name}}" action="tag">{{name}}</a>
+            <a href="{{url}}" title="{{name}}" action="tag" class="white">{{name}}</a>
         {{/foreach}}
         <time class="post-date" datetime="{{date published_at format='YYYY-MM-DD'}}">{{date published_at timeago="true"}}</time>
     </footer>
