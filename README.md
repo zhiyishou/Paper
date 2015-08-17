@@ -1,8 +1,11 @@
-# Casper
+# Paper
 
-The default theme for [Ghost](http://github.com/tryghost/ghost/).
+This is a custom theme for Ghost blog on [](zhiyishou.com)
 
-To download, visit the [releases](https://github.com/TryGhost/Casper/releases) page.
+If you like my design , you can clone this project , ==but== there is too many personal thing for using , you need to replacing them to your own
+
+Have fun.
+
 
 ## Copyright & License
 
