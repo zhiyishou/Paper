@@ -7,11 +7,10 @@ var $body = $("#inner-body"),
 
 $(function () {
     //load article list and cnblog list
-    alert(!$("#left-middle").html().trim())
     if (!$("#left-middle").html().trim()) {
-        $.get(window.location.origin, null, function (data) {
+        $.get("/", null, function (data) {
             var $data = $(data);
-            
+
             $("#left-middle").replaceWith($data.find("#left-middle"));
             $("#right-middle").replaceWith($data.find("#right-middle"));
         }, "html");
@@ -24,6 +23,7 @@ $(function () {
 $("#aside").on({
     "mouseenter": function () {
         !PhoneView && $(this).removeClass("aside-close").addClass("aside-open");
+        $("#aside .profile").scrollTop(0);
     },
     "mouseleave": function () {
         !PhoneView && $(this).removeClass("aside-open").addClass("aside-close");
@@ -32,10 +32,11 @@ $("#aside").on({
         var $this = $(this);
 
         if(PhoneView) {
-            if (e.target.className == "close") {
+            if (e.target.className == "close") {//click close button
                 $this.removeClass("aside-open").addClass("aside-close");
             }else if(!$this.hasClass("aside-open")){
                 $this.removeClass("aside-close").addClass("aside-open");
+                $("#aside .profile").scrollTop(0);
             }
         }
     }
@@ -296,7 +297,7 @@ $(".contents,.profile").on("click", "a", function (e) {
 
 $("#home-btn").click(function () {
     $body.removeClass("left-bottom left-top right-middle").addClass("left-middle");
-    window.history.pushState({type: Type = "list", url: window.location.origin}, document.title, window.location.origin);
+    window.history.pushState({type: Type = "list", url: "/"}, document.title, "/");
     doChanged();
     stopMedia();
 });
