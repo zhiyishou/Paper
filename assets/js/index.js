@@ -46,7 +46,7 @@ $("#aside").on({
 $("#switch").on("click",function(){
     if(PhoneView){
         $body.toggleClass("right-middle");
-        $("body").scrollTop(0);
+        $("html,body").scrollTop(0);
     }else{
         $(this).one("mouseleave", function () {
             $body.toggleClass("right-middle");
@@ -92,7 +92,7 @@ $(".contents,.profile").on("click", "a", function (e) {
                 $body.removeClass("left-top left-middle").addClass("left-bottom");
 
                 if(PhoneView){
-                    $("body").scrollTop(0);
+                    $("html,body").scrollTop(0);
                     playMedia();
                 }else{
                     $(this).scrollTop(0);
@@ -107,7 +107,7 @@ $(".contents,.profile").on("click", "a", function (e) {
         case "tag":
             $("#left-top").load(href + " #left-top>*", function () {
                 $body.removeClass("left-bottom left-middle").addClass("left-top");
-                PhoneView && $("body").scrollTop(0);
+                PhoneView && $("html,body").scrollTop(0);
                 doChanged();
                 window.history.pushState({type: action, url: href}, document.title, href);
                 maskLoding.hide();
@@ -116,7 +116,7 @@ $(".contents,.profile").on("click", "a", function (e) {
         case "page":
             $("#left-middle").load(href + " #left-middle>*", function () {
                 $body.removeClass("left-top left-bottom");
-                PhoneView ? $("body").scrollTop(0) : $(this).scrollTop(0);
+                PhoneView ? $("html,body").scrollTop(0) : $(this).scrollTop(0);
                 doChanged();
                 window.history.pushState({type: action, url: href}, document.title, href);
                 maskLoding.hide();
@@ -124,7 +124,7 @@ $(".contents,.profile").on("click", "a", function (e) {
             break;
         default :
             Type = "list";
-            PhoneView && $("body").scrollTop(0);
+            PhoneView && $("html,body").scrollTop(0);
     }
 });
 
