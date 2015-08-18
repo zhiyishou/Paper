@@ -169,37 +169,37 @@
 
 @-webkit-keyframes crash-top {
   20% {
-    -webkit-transform: translateX(-100%);
+    -webkit-transform: translateY(-100%);
   }
   40% {
-    -webkit-transform: translateX(-85%);
+    -webkit-transform: translateY(-85%);
   }
   60% {
-    -webkit-transform: translateX(-100%);
+    -webkit-transform: translateY(-100%);
   }
   80% {
-    -webkit-transform: translateX(-92%);
+    -webkit-transform: translateY(-92%);
   }
   100% {
-    -webkit-transform: translateX(-100%);
+    -webkit-transform: translateY(-100%);
   }
 }
 
 @keyframes crash-top {
   20% {
-    transform: translateX(-100%);
+    transform: translateY(-100%);
   }
   40% {
-    transform: translateX(-85%);
+    transform: translateY(-85%);
   }
   60% {
-    transform: translateX(-100%);
+    transform: translateY(-100%);
   }
   80% {
-    transform: translateX(-92%);
+    transform: translateY(-92%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateY(-100%);
   }
 }
 
@@ -284,20 +284,20 @@ h6 {
       &:hover {
         background: @dark-red;
         div {
-          .tf(translateX(0px));
+          .tx(0);
         }
         & ~ .contents .content {
-          .tf(translateX(0px));
+          .tx(0);
         }
       }
 
       div {
-        .tf(translateX(-100px));
+        .tx(-100px);
       }
     }
 
     .content {
-      .tf(translateX(-100%));
+      .tx(-100%);
     }
   }
 
@@ -558,13 +558,13 @@ h6 {
 
   .title {
     .title-first {
-      .tf(translateX(100px));
+      .tx(100px);
     }
     .title-second {
-      .tf(translateX(30px));
+      .tx(30px);
     }
     .title-third {
-      .tf(translateX(70px));
+      .tx(70px);
     }
   }
 
@@ -602,12 +602,12 @@ h6 {
         .tf(rotateY(10deg));
 
         .content {
-          .tf(translateX(-100%));
+          .tx(-100%);
         }
       }
 
       div {
-        .tf(translateX(-100px));
+        .tx(-100px);
       }
     }
 
@@ -1015,6 +1015,7 @@ h1.post-title {
 @media screen and (max-width: 900px) {
   * {
     transform: none !important;
+    -webkit-transform: none !important;
     transition: none !important;
   }
 
