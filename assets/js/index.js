@@ -1,6 +1,7 @@
 var $body = $("#inner-body"),
     Type,
     PhoneView = false,
+    Title = "纸异兽",
     supportHistory = !!(window.history.pushState && window.history.replaceState);
 
 //alert(!!navigator.userAgent.match(/mobile/i));
@@ -72,7 +73,8 @@ $(".content").scroll(function(){
 
 $(".contents,.profile").on("click", "a", function (e) {
     //for normal a link
-    var action = $(this).attr("action");
+    var action = $(this).attr("action"),
+        title = Title;
     if (!action || !supportHistory) {
         return;
     }
@@ -99,7 +101,8 @@ $(".contents,.profile").on("click", "a", function (e) {
                 }
 
                 doChanged();
-                window.history.pushState({type: action, url: href}, document.title, href);
+                setTitle(title = $("h1.post-title").text());
+                window.history.pushState({type: action, url: href}, title, href);
                 maskLoding.hide();
                 initDuoshuo();
             });
@@ -109,7 +112,8 @@ $(".contents,.profile").on("click", "a", function (e) {
                 $body.removeClass("left-bottom left-middle").addClass("left-top");
                 PhoneView && $("html,body").scrollTop(0);
                 doChanged();
-                window.history.pushState({type: action, url: href}, document.title, href);
+                setTitle(title = $("h1.page-title").text());
+                window.history.pushState({type: action, url: href}, title, href);
                 maskLoding.hide();
             });
             break;
@@ -118,6 +122,7 @@ $(".contents,.profile").on("click", "a", function (e) {
                 $body.removeClass("left-top left-bottom");
                 PhoneView ? $("html,body").scrollTop(0) : $(this).scrollTop(0);
                 doChanged();
+                setTitle(title);
                 window.history.pushState({type: action, url: href}, document.title, href);
                 maskLoding.hide();
             });
@@ -294,10 +299,10 @@ $(".contents,.profile").on("click", "a", function (e) {
     }
 })();
 
-
 $("#home-btn").click(function () {
     $body.removeClass("left-bottom left-top right-middle").addClass("left-middle");
-    window.history.pushState({type: Type = "list", url: "/"}, document.title, "/");
+    setTitle(Title)
+    window.history.pushState({type: Type = "list", url: "/"}, Title, "/");
     doChanged();
     stopMedia();
 });
@@ -331,6 +336,10 @@ window.addEventListener("popstate", function (e) {
     stopMedia();
 });
 
+
+function setTitle(t){
+    $("title").text(t)
+}
 
 var masker = (function (noTransition) {
     var $mask = $("#mask-layer");
