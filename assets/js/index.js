@@ -447,7 +447,7 @@ var fixWidthOfAside = (function() {
             if ($body.hasClass("left-bottom")) {
                 $body.css("padding-left",0);
             } else {
-                width = $title.height() * 0.3;
+                width = $bodt * height() * 0.3;
                 $title.width(width);
                 $body.css("padding-left",width);
             }
