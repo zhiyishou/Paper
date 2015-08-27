@@ -7,6 +7,7 @@ var $body = $("#inner-body"),
 //alert(!!navigator.userAgent.match(/mobile/i));
 
 $(function () {
+    doChanged();
     //load article list and cnblog list
     if (!$("#left-middle").html().trim()) {
         $.get("/", null, function (data) {
@@ -17,7 +18,6 @@ $(function () {
         }, "html");
     }
     init();
-    doChanged();
 });
 
 
