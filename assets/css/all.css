@@ -615,7 +615,7 @@ header.post-header {
   margin-bottom: 15px;
 }
 header.post-header .post-title a {
-  display: block;
+  display: inline-block;
   color: #333333;
   text-decoration: none;
   animation-timing-function: cubic-bezier(0.96, 0.04, 0.95, 0.45);
