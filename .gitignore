@@ -5,13 +5,13 @@
 !/assets/css
 /assets/css/*
 !/assets/css/all.less
+!/assets/css/all.css
 
 !/assets/img
 /assets/img/*
 !/assets/img/font_first.png
 !/assets/img/font_second.png
 !/assets/img/font_third.png
-!/assets/img/head.jpg
 !/assets/img/life_biking.png
 !/assets/img/life_climbing.png
 !/assets/img/life_running.png
