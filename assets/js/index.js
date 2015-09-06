@@ -91,8 +91,7 @@ $(".content").scroll(function(){
 
 $(".contents,.profile").on("click", "a", function (e) {
     //for normal a link
-    var $this = $(this),
-        action = $this.attr("action"),
+    var action = $(this).attr("action"),
         title = Title;
     if (!action || !supportHistory) {
         return;
@@ -107,7 +106,7 @@ $(".contents,.profile").on("click", "a", function (e) {
     var href = this.href;
 
     maskLoding.show();
-    switch (Type = $this.attr("action")) {
+    switch (Type = $(this).attr("action")) {
         case "article":
             $("#left-bottom").load(href + " #left-bottom>*", function () {
                 $body.removeClass("left-top left-middle").addClass("left-bottom");
@@ -129,7 +128,7 @@ $(".contents,.profile").on("click", "a", function (e) {
         case "tag":
             $("#left-top").load(href + " #left-top>*", function () {
                 $body.removeClass("left-bottom left-middle").addClass("left-top");
-                PhoneView ? $("html,body").scrollTop(0) : $this.scrollTop(0);
+                PhoneView ? $("html,body").scrollTop(0) : $(this).scrollTop(0);
                 doChanged();
                 setTitle(title = $("h1.page-title").text());
                 window.history.pushState({type: action, url: href}, title, href);
@@ -139,7 +138,7 @@ $(".contents,.profile").on("click", "a", function (e) {
         case "page":
             $("#left-middle").load(href + " #left-middle>*", function () {
                 $body.removeClass("left-top left-bottom");
-                PhoneView ? $("html,body").scrollTop(0) : $this.scrollTop(0);
+                PhoneView ? $("html,body").scrollTop(0) : $(this).scrollTop(0);
                 doChanged();
                 setTitle(title);
                 window.history.pushState({type: action, url: href}, document.title, href);
