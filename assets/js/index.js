@@ -72,17 +72,6 @@ $("#switch").on({
         }
     }
 });
-//$("#switch").on("click",function(){
-//    if(PhoneView){
-//        $body.toggleClass("right-middle");
-//        $("html,body").scrollTop(0);
-//    }else{
-//        //$(this).one("mouseleave", function () {
-//            $body.toggleClass("right-middle");
-//            //$(this).removeAttr("id");
-//        //});
-//    }
-//});
 
 $(window).resize(function () {
     PhoneView = $("body").width() < 900;
@@ -181,8 +170,6 @@ $(".contents,.profile").on("click", "a", function (e) {
             isLock: true
         },
         url;
-
-    //$oriBox.append($close);
 
     $(".contents")
         .on("mouseenter",".post-content img",function(){
