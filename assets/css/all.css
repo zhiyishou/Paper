@@ -229,14 +229,14 @@ h6 {
 #inner-body.right-middle .switch {
   background: #ff003f;
 }
-#inner-body.right-middle .switch:hover {
+#inner-body.right-middle .switch.hover {
   background: #ec0038;
 }
-#inner-body.right-middle .switch:hover div {
+#inner-body.right-middle .switch.hover div {
   -webkit-transform: translateX(0);
   transform: translateX(0);
 }
-#inner-body.right-middle .switch:hover ~ .contents .content {
+#inner-body.right-middle .switch.hover ~ .contents .content {
   -webkit-transform: translateX(0);
   transform: translateX(0);
 }
@@ -503,18 +503,18 @@ h6 {
   transition-duration: 0.5s;
   overflow: hidden;
 }
-.container .switch:hover {
+.container .switch.hover {
   background: #1478ea;
 }
-.container .switch:hover ~ .contents {
+.container .switch.hover ~ .contents {
   -webkit-transform: rotateY(10deg);
   transform: rotateY(10deg);
 }
-.container .switch:hover ~ .contents .content {
+.container .switch.hover ~ .contents .content {
   -webkit-transform: translateX(-100%);
   transform: translateX(-100%);
 }
-.container .switch:hover div {
+.container .switch.hover div {
   -webkit-transform: translateX(-100px);
   transform: translateX(-100px);
 }
