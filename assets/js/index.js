@@ -43,17 +43,46 @@ $("#aside").on({
     }
 });
 
-
-$("#switch").on("click",function(){
-    if(PhoneView){
-        $body.toggleClass("right-middle");
-        $("html,body").scrollTop(0);
-    }else{
-        $(this).one("mouseleave", function () {
+$("#switch").on({
+    "mouseenter": function(){
+        !PhoneView && $(this).addClass("hover");
+    },
+    "mouseleave": function(){
+        !PhoneView && $(this).removeClass("hover");
+    },
+    "click": function(){
+        var $this = $(this);
+        if(PhoneView){
             $body.toggleClass("right-middle");
-        });
+            $("html,body").scrollTop(0);
+        }else{
+            //toggle hover class, if hover exists, so that this is first click after mouseenter
+            //if hover not exist, so prove that this isn't.
+            $this.toggleClass("hover");
+
+            //if isn't first click, add animation to this event
+            if($this.hasClass("hover")){
+                setTimeout(function(){
+                    $body.toggleClass("right-middle");
+                    $this.removeClass("hover");
+                },500);
+            }else{
+                $body.toggleClass("right-middle");
+            }
+        }
     }
 });
+//$("#switch").on("click",function(){
+//    if(PhoneView){
+//        $body.toggleClass("right-middle");
+//        $("html,body").scrollTop(0);
+//    }else{
+//        //$(this).one("mouseleave", function () {
+//            $body.toggleClass("right-middle");
+//            //$(this).removeAttr("id");
+//        //});
+//    }
+//});
 
 $(window).resize(function () {
     PhoneView = $("body").width() < 900;
