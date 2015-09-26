@@ -7,7 +7,6 @@ var $body = $("#inner-body"),
 //alert(!!navigator.userAgent.match(/mobile/i));
 
 $(function () {
-    doChanged();
     //load article list and cnblog list
     if (!$("#left-middle").html().trim()) {
         $.get("/", null, function (data) {
@@ -409,6 +408,8 @@ function init() {
         playMedia();
         initDuoshuo();
     }
+
+    doChanged();
     window.history.replaceState({type: Type, url: window.location.href}, document.title, window.location.href);
 }
 
