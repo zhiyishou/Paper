@@ -32,7 +32,7 @@
 !/partials/loop.hbs
 !/partials/nav.hbs
 !/partials/switch.hbs
-!/partials/cnblog.hbs
+!/partials/tech.hbs
 !/partials/post.hbs
 !/partials/pagination.hbs
 
