@@ -644,6 +644,7 @@ header.post-header .post-title a {
   color: #333333;
   text-decoration: none;
   animation-timing-function: cubic-bezier(0.96, 0.04, 0.95, 0.45);
+  -webkit-animation-timing-function: cubic-bezier(0.96, 0.04, 0.95, 0.45);
 }
 header.post-header .post-title a:hover {
   -webkit-animation: crash-left 0.7s;
@@ -688,6 +689,7 @@ footer.post-meta a {
   background: #333333;
   padding: 3px;
   animation-timing-function: cubic-bezier(0.96, 0.04, 0.95, 0.45);
+  -webkit-animation-timing-function: cubic-bezier(0.96, 0.04, 0.95, 0.45);
 }
 footer.post-meta a:hover {
   -webkit-animation: updown 0.5s;
