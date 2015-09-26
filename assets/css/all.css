@@ -261,6 +261,7 @@ h6 {
   -webkit-transform: translateY(0);
   transform: translateY(0);
   transition: transform 0.2s ease 1s;
+  -webkit-transition: -webkit-transform 0.2s ease 1s;
 }
 #inner-body.left-top #left-top,
 #inner-body.left-top #left-middle {
@@ -271,6 +272,7 @@ h6 {
   -webkit-transform: translateY(0);
   transform: translateY(0);
   transition: transform 0.2s ease 1s;
+  -webkit-transition: -webkit-transform 0.2s ease 1s;
 }
 .post-content p,
 .post-content pre {
@@ -329,12 +331,14 @@ h6 {
   z-index: 1;
   float: left;
   transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
 }
 .aside .title img {
   height: 30%;
   margin: 0 0;
   text-align: center;
   transition-duration: 1.5s;
+  -webkit-transition-duration: 1.5s;
   display: block;
   position: absolute;
 }
@@ -430,34 +434,44 @@ h6 {
 }
 .aside-close {
   transition-duration: 1s;
+  -webkit-transition-duration: 1s;
 }
 .aside-close + .container {
   transition-duration: 1s;
+  -webkit-transition-duration: 1s;
 }
 .aside-close .title img {
   transition: transform 1s cubic-bezier(0.2, 0.3, 0.25, 0.9);
+  -webkit-transition: -webkit-transform 1s cubic-bezier(0.2, 0.3, 0.25, 0.9);
 }
 .aside-close .profile {
   opacity: 0;
   transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
   transition-timing-function: cubic-bezier(0, 0.55, 0.06, 0.83);
+  -webkit-transition-timing-function: cubic-bezier(0, 0.55, 0.06, 0.83);
 }
 .aside-open {
   padding-right: 600px;
   transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
 }
 .aside-open + .container {
   overflow: visible;
   transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
   -webkit-transform: translateX(600px);
   transform: translateX(600px);
   transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
 }
 .aside-open + .container .switch {
   transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
   -webkit-transform: rotateY(60deg);
   transform: rotateY(60deg);
   transform-origin: 0 50%;
+  -webkit-transform-origin: 0 50%;
   background: #1478ea;
 }
 .aside-open + .container .contents {
@@ -479,13 +493,17 @@ h6 {
 .aside-open .profile {
   opacity: 1;
   transition-duration: 1s;
+  -webkit-transition-duration: 1s;
   transition-timing-function: cubic-bezier(0.51, 0.1, 0.13, 0.87);
+  -webkit-transition-timing-function: cubic-bezier(0.51, 0.1, 0.13, 0.87);
 }
 .container {
   height: 100%;
   transition: transform 1s;
+  -webkit-transition: -webkit-transform 1s;
   will-change: transform;
   perspective: 800px;
+  -webkit-perspective: 800px;
   position: relative;
   background: #333333;
   overflow: hidden;
@@ -501,6 +519,7 @@ h6 {
   cursor: pointer;
   will-change: transform;
   transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
   overflow: hidden;
 }
 .container .switch.hover {
@@ -525,7 +544,9 @@ h6 {
   position: absolute;
   bottom: 0;
   transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
   transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
 }
 .container .switch p {
   width: 50%;
@@ -537,11 +558,15 @@ h6 {
   height: 100%;
   margin-left: 100px;
   transition-property: transform;
+  -webkit-transition-property: -webkit-transform;
   transform-origin: 0 50%;
+  -webkit-transform-origin: 0 50%;
   transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
   position: relative;
   overflow: hidden;
   perspective: 800px;
+  -webkit-perspective: 800px;
 }
 .container .contents .content {
   width: 100%;
@@ -550,6 +575,7 @@ h6 {
   box-sizing: border-box;
   background: #ffffff;
   transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
   will-change: transform;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -794,6 +820,7 @@ h1.post-title {
   text-align: center;
   opacity: 1;
   transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
   -webkit-transform: translateY(-100%);
   transform: translateY(-100%);
 }
@@ -822,6 +849,7 @@ h1.post-title {
   margin-left: -30px;
   margin-top: -30px;
   perspective: 120px;
+  -webkit-perspective: 120px;
   background-color: #148afd;
   -webkit-animation: rotateplane 1.2s infinite ease-in-out;
   animation: rotateplane 1.2s infinite ease-in-out;
@@ -857,6 +885,7 @@ h1.post-title {
     transform: none !important;
     -webkit-transform: none !important;
     transition: none !important;
+    -webkit-transition: none!important;
   }
   body {
     overflow: auto;
@@ -996,6 +1025,7 @@ h1.post-title {
   .container {
     margin-left: 0;
     perspective: none;
+    -webkit-perspective: none;
     will-change: initial;
     height: auto;
   }
