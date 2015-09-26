@@ -596,6 +596,18 @@ h6 {
 #right-middle .post-header {
   border: 0;
 }
+#right-middle > .article > div {
+  width: 30%;
+  float: left;
+}
+#right-middle > .article > div:first-child {
+  width: 65%;
+  padding-right: 5%;
+}
+#right-middle header.italic-head {
+  font-style: italic;
+  border-bottom: 2px solid #148afd !important;
+}
 #left-top {
   position: absolute;
   left: 0;
