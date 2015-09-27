@@ -2,7 +2,7 @@
 
 This is a custom theme for Ghost blog on http://zhiyishou.com
 
-If you like my design , you can clone this project , but there is too many personal thing for using , you need to replacing them to your own.
+If you like my design , you can clone this project , but there is too many personal thing for using , you need to replacing them to yours.
 
 Have fun.
 
