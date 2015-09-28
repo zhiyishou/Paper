@@ -606,7 +606,14 @@ h6 {
 }
 #right-middle header.italic-head {
   font-style: italic;
-  border-bottom: 2px solid #148afd !important;
+  color: #ff003f;
+  border-bottom: 2px solid #ff003f !important;
+}
+#right-middle footer.view-more {
+  margin-top: 30px;
+  font-style: italic;
+  font-size: 1em;
+  color: #ff003f;
 }
 #left-top {
   position: absolute;
