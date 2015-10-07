@@ -971,6 +971,9 @@ h1.post-title {
     width: 100px;
     height: 100px;
   }
+  .post-content blockquote {
+    margin: 0;
+  }
   #inner-body {
     height: auto;
   }
@@ -1102,4 +1105,3 @@ h1.post-title {
     display: block;
   }
 }
-/*# sourceMappingURL=all.css.map */
