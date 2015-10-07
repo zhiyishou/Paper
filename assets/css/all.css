@@ -564,8 +564,6 @@ h6 {
   -webkit-transition-duration: 0.4s;
   position: relative;
   overflow: hidden;
-  perspective: 800px;
-  -webkit-perspective: 800px;
 }
 .container .contents .content {
   width: 100%;
