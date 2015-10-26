@@ -461,8 +461,8 @@ h6 {
   -webkit-transform-origin: 0 0;
   -webkit-transform: translateX(600px);
   transform: translateX(600px);
-  transition-duration: 0.5s;
-  -webkit-transition-duration: 0.5s;
+  -webkit-transition: -webkit-transform 0.5s 0.125s cubic-bezier(0.13, 1.1, 0.57, 1.17);
+  transition: transform 0.5s 0.125s cubic-bezier(0.13, 1.1, 0.57, 1.17);
 }
 .aside-open + .container .switch {
   transition-duration: 0.2s;
