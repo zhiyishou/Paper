@@ -333,9 +333,11 @@ h6 {
   transition-duration: 0.5s;
   -webkit-transition-duration: 0.5s;
 }
-.aside .title img {
+.aside .title img,
+.aside .title svg {
   height: 30%;
   margin: 0 0;
+  fill: white;
   text-align: center;
   transition-duration: 1.5s;
   -webkit-transition-duration: 1.5s;
@@ -440,7 +442,8 @@ h6 {
   transition-duration: 1s;
   -webkit-transition-duration: 1s;
 }
-.aside-close .title img {
+.aside-close .title img,
+.aside-close .title svg {
   transition: transform 1s cubic-bezier(0.2, 0.3, 0.25, 0.9);
   -webkit-transition: -webkit-transform 1s cubic-bezier(0.2, 0.3, 0.25, 0.9);
 }
@@ -954,7 +957,8 @@ h1.post-title {
     float: none;
     text-align: center;
   }
-  .aside .title img {
+  .aside .title img,
+  .aside .title svg {
     width: 20%;
     height: auto;
     position: static;
