@@ -1,6 +1,7 @@
 var $body = $("#inner-body"),
     Type,
     PhoneView = false,
+    currentPathname = "/",
     Title = "纸异兽",
     supportHistory = !!(window.history.pushState && window.history.replaceState);
 
@@ -105,6 +106,7 @@ function ATagClick(e, data) {
 
     e && e.preventDefault();
     var href = isPopstate ? data.href : this.href;
+    currentPathname = href.replace(/^.*?\/\/.*?(?=\/)/,"");
 
     maskLoding.show();
     switch (Type = action) {
@@ -317,7 +319,9 @@ $(".contents,.profile").on("click", "a", ATagClick);
 
 $("#home-btn").click(function () {
     $body.removeClass("left-bottom left-top right-middle").addClass("left-middle");
-    setTitle(Title)
+    currentPathname = "/";
+
+    setTitle(Title);
     window.history.pushState({type: Type = "page", url: "/"}, Title, "/");
     doChanged();
     stopMedia();
@@ -335,7 +339,10 @@ $(window).on("popstate", function (e) {
             $body.removeClass("left-bottom left-middle").addClass("left-top");
             break;
         case "page":
-            maskLoding.show();
+            if (currentPathname.search(/^\/$|\/page\//) != 0) {
+                $body.removeClass("left-bottom left-top").addClass("left-middle");
+                break;
+            }
             ATagClick(undefined, {action: Type, href: state.url});
     }
     doChanged();
@@ -400,6 +407,7 @@ function init() {
         initDuoshuo();
     }
 
+    currentPathname = window.location.pathname;
     //remove aside-init when the DOM is ready, so we can show a perfect page even the index.js is not loaded
     $("#aside").removeClass("aside-init");
     doChanged();
