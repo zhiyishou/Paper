@@ -28,13 +28,13 @@ $("#aside").on({
     "mouseleave": function () {
         !PhoneView && $(this).removeClass("aside-open").addClass("aside-close");
     },
-    "click": function(e){
+    "click": function (e) {
         var $this = $(this);
 
-        if(PhoneView) {
+        if (PhoneView) {
             if (e.target.className == "close") {//click close button
                 $this.removeClass("aside-open").addClass("aside-close");
-            }else if(!$this.hasClass("aside-open")){
+            } else if (!$this.hasClass("aside-open")) {
                 $this.removeClass("aside-close").addClass("aside-open");
                 $("#aside .profile").scrollTop(0);
             }
@@ -43,29 +43,29 @@ $("#aside").on({
 });
 
 $("#switch").on({
-    "mouseenter": function(){
+    "mouseenter": function () {
         !PhoneView && $(this).addClass("hover");
     },
-    "mouseleave": function(){
+    "mouseleave": function () {
         !PhoneView && $(this).removeClass("hover");
     },
-    "click": function(){
+    "click": function () {
         var $this = $(this);
-        if(PhoneView){
+        if (PhoneView) {
             $body.toggleClass("right-middle");
             $("html,body").scrollTop(0);
-        }else{
+        } else {
             //toggle hover class, if hover exists, so that this is first click after mouseenter
             //if hover not exist, so prove that this isn't.
             $this.toggleClass("hover");
 
             //if isn't first click, add animation to this event
-            if($this.hasClass("hover")){
-                setTimeout(function(){
+            if ($this.hasClass("hover")) {
+                setTimeout(function () {
                     $body.toggleClass("right-middle");
                     $this.removeClass("hover");
-                },500);
-            }else{
+                }, 500);
+            } else {
                 $body.toggleClass("right-middle");
             }
         }
@@ -77,49 +77,51 @@ $(window).resize(function () {
     doChanged();
 });
 
-$(".content").scroll(function(){
-    if(!PhoneView) return;
+$(".content").scroll(function () {
+    if (!PhoneView) return;
 
-    if($(this).scrollTop() >= 10){
+    if ($(this).scrollTop() >= 10) {
         $("#aside").addClass("slideUp");
-    }else{
+    } else {
         $("#aside").removeClass("slideUp");
     }
     fixWidthOfAside();
 });
 
-$(".contents,.profile").on("click", "a", function (e) {
+function ATagClick(e, data) {
     //for normal a link
-    var action = $(this).attr("action"),
+    var isPopstate = !e,
+        action = isPopstate ? data.action : $(this).attr("action"),
         title = Title;
+
     if (!action || !supportHistory) {
         return;
     }
 
-    if (PhoneView && this.id == "readmore"){
+    if (!data && PhoneView && this.id == "readmore") {
         $("#aside").removeClass("aside-open").addClass("aside-close");
         e.stopPropagation();
     }
 
-    e.preventDefault();
-    var href = this.href;
+    e && e.preventDefault();
+    var href = isPopstate ? data.href : this.href;
 
     maskLoding.show();
-    switch (Type = $(this).attr("action")) {
+    switch (Type = action) {
         case "article":
             $("#left-bottom").load(href + " #left-bottom>*", function () {
                 $body.removeClass("left-top left-middle").addClass("left-bottom");
 
-                if(PhoneView){
+                if (PhoneView) {
                     $("html,body").scrollTop(0);
                     playMedia();
-                }else{
+                } else {
                     $(this).scrollTop(0);
                 }
 
                 doChanged();
                 setTitle(title = $("h1.post-title").text());
-                window.history.pushState({type: action, url: href}, title, href);
+                !isPopstate && window.history.pushState({type: action, url: href}, title, href);
                 maskLoding.hide();
                 initDuoshuo();
             });
@@ -130,7 +132,7 @@ $(".contents,.profile").on("click", "a", function (e) {
                 PhoneView ? $("html,body").scrollTop(0) : $(this).scrollTop(0);
                 doChanged();
                 setTitle(title = $("h1.page-title").text());
-                window.history.pushState({type: action, url: href}, title, href);
+                !isPopstate && window.history.pushState({type: action, url: href}, title, href);
                 maskLoding.hide();
             });
             break;
@@ -140,25 +142,24 @@ $(".contents,.profile").on("click", "a", function (e) {
                 PhoneView ? $("html,body").scrollTop(0) : $(this).scrollTop(0);
                 doChanged();
                 setTitle(title);
-                window.history.pushState({type: action, url: href}, document.title, href);
+                !isPopstate && window.history.pushState({type: action, url: href}, document.title, href);
                 maskLoding.hide();
             });
             break;
-        default :
-            Type = "list";
-            PhoneView && $("html,body").scrollTop(0);
     }
-});
+}
+
+$(".contents,.profile").on("click", "a", ATagClick);
 
 
 //zoom for picture
-(function(){
+(function () {
     var $tag = $("<a class='show-original-img white'>原图</a>"),
         img = document.createElement("img"),
         $img = $(img),
         $oriBox = $("<div id='original-box'><div id='masker-close'>&times;</div></div>"),
         $close = $oriBox.children("#masker-close"),
-        //store original image data for zoom smaller to recovery the location
+    //store original image data for zoom smaller to recovery the location
         originalData = {
             ratio: 1,
             width: 0,
@@ -171,11 +172,11 @@ $(".contents,.profile").on("click", "a", function (e) {
         url;
 
     $(".contents")
-        .on("mouseenter",".post-content img",function(){
+        .on("mouseenter", ".post-content img", function () {
             var $this = $(this);
 
-            url = this.src.replace(/-resize$/,"");
-            $this.parent().css("position","relative");
+            url = this.src.replace(/-resize$/, "");
+            $this.parent().css("position", "relative");
             originalData.ratio = $this.width() / $this.height();
 
             $tag.css({
@@ -184,21 +185,21 @@ $(".contents,.profile").on("click", "a", function (e) {
             });
 
             $this.after($tag);
-        }).on("mouseleave",".post-content img",function(e){
-            if(e.relatedTarget == $tag[0]){
+        }).on("mouseleave", ".post-content img", function (e) {
+            if (e.relatedTarget == $tag[0]) {
                 return;
             }
             $tag.remove();
         });
 
-    $tag[0].onclick = function(){
+    $tag[0].onclick = function () {
         var $body = $("body"),
             width,
             height;
 
         //do it before get width because the scroll bar
-        if(PhoneView){
-            $body.css("overflow","hidden");
+        if (PhoneView) {
+            $body.css("overflow", "hidden");
         }
 
         width = $body.width();
@@ -207,16 +208,16 @@ $(".contents,.profile").on("click", "a", function (e) {
         $oriBox.prepend($img);
         img.src = url;
 
-        if(originalData.ratio >  width / height){
+        if (originalData.ratio > width / height) {
             originalData.width = width;
             originalData.height = width / originalData.ratio;
-            originalData.top = (height - originalData.height)/2;
+            originalData.top = (height - originalData.height) / 2;
             originalData.left = 0;
-        }else{
-            originalData.width =  height * originalData.ratio;
+        } else {
+            originalData.width = height * originalData.ratio;
             originalData.height = height;
             originalData.top = 0;
-            originalData.left = (width - originalData.width)/2;
+            originalData.left = (width - originalData.width) / 2;
         }
 
         $img.css({
@@ -228,27 +229,27 @@ $(".contents,.profile").on("click", "a", function (e) {
 
         //for sync showing image and masker
         //so we will get a better transition
-        setTimeout(function(){
+        setTimeout(function () {
             $body.append($oriBox);
-        },300);
+        }, 300);
     };
 
 
     //see "jquery remove() and Event" with bug tag in evernote
-    img.onload = function(){
+    img.onload = function () {
         $("#loading").fadeOut();
     };
 
-    $close[0].onclick = function(){
-        if(PhoneView){
-            $("body").css("overflow","");
+    $close[0].onclick = function () {
+        if (PhoneView) {
+            $("body").css("overflow", "");
         }
 
         $oriBox.remove();
         maskLoding.hide();
     };
 
-    img.onmousewheel = img.dommousescroll = debounce(mousewheel,20);
+    img.onmousewheel = img.dommousescroll = debounce(mousewheel, 20);
     img.addEventListener("DOMMouseScroll", img.onmousewheel);
 
     function mousewheel(e) {
@@ -317,42 +318,32 @@ $(".contents,.profile").on("click", "a", function (e) {
 $("#home-btn").click(function () {
     $body.removeClass("left-bottom left-top right-middle").addClass("left-middle");
     setTitle(Title)
-    window.history.pushState({type: Type = "list", url: "/"}, Title, "/");
+    window.history.pushState({type: Type = "page", url: "/"}, Title, "/");
     doChanged();
     stopMedia();
 });
 
-window.addEventListener("popstate", function (e) {
-    switch (Type = e.state.type) {
+$(window).on("popstate", function (e) {
+    var state = e.originalEvent.state;
+
+    switch (Type = state.type) {
         case "article":
             $body.removeClass("left-top left-middle").addClass("left-bottom");
+            ATagClick(undefined, {action: Type, href: state.url});
             break;
         case "tag":
             $body.removeClass("left-bottom left-middle").addClass("left-top");
             break;
-        case "list":
-            if (window.location.pathname.search(/^\/$||\/page\//) != 0) {
-                $body.removeClass("left-bottom left-top").addClass("left-middle");
-                break;
-            }
         case "page":
             maskLoding.show();
-            $("#left-middle").load(e.state.url + " #left-middle>*", function () {
-                $body.removeClass("left-top left-bottom");
-                doChanged();
-                window.history.pushState({
-                    type: "page",
-                    url: window.location.href
-                }, document.title, window.location.href);
-                maskLoding.hide();
-            });
+            ATagClick(undefined, {action: Type, href: state.url});
     }
     doChanged();
     stopMedia();
 });
 
 
-function setTitle(t){
+function setTitle(t) {
     $("title").text(t)
 }
 
@@ -361,16 +352,16 @@ var masker = (function (noTransition) {
 
     return {
         show: function () {
-            if(noTransition){
+            if (noTransition) {
                 $mask.show();
-            }else{
+            } else {
                 $mask.fadeIn();
             }
         },
         hide: function () {
-            if(noTransition){
+            if (noTransition) {
                 $mask.hide();
-            }else{
+            } else {
                 $mask.fadeOut();
             }
         }
@@ -398,7 +389,7 @@ function init() {
     var path = window.location.pathname;
 
     if (path == "/") {
-        Type = "list";
+        Type = "page";
     } else if (path.indexOf("/tag/") == 0) {
         Type = "tag";
     } else if (path.indexOf("/page/") == 0) {
@@ -425,15 +416,15 @@ function stopMedia() {
     })
 }
 
-function playMedia(){
-    $("#left-bottom").find("audio[autoplay=autoplay]").each(function(){
-        setTimeout(function(){
+function playMedia() {
+    $("#left-bottom").find("audio[autoplay=autoplay]").each(function () {
+        setTimeout(function () {
             this.play();
-        },1000)
+        }, 1000)
     })
 }
 
-var fixWidthOfAside = (function() {
+var fixWidthOfAside = (function () {
     /**
      * 修正浏览器bug,test.html中测试
      * 如果子节点为img，其宽度auto，高度根据父节点高度百分比变化
@@ -446,13 +437,13 @@ var fixWidthOfAside = (function() {
         $container = $("#container"),
         width;
 
-    return function() {
+    return function () {
         //do the change when convert layout
-        if(isPhoneViewBefore && !PhoneView){
+        if (isPhoneViewBefore && !PhoneView) {
             //phone to pc
             $body.css("padding-top", "");
             isPhoneViewBefore = PhoneView;
-        }else if(!isPhoneViewBefore && PhoneView){
+        } else if (!isPhoneViewBefore && PhoneView) {
             //pc to phone
             $body.css("padding-left", "");
             $title.width("auto");
@@ -460,29 +451,32 @@ var fixWidthOfAside = (function() {
         }
 
         if (PhoneView) {
-            if(Type == "article") {return $body.css("padding-top",0)};
+            if (Type == "article") {
+                return $body.css("padding-top", 0)
+            }
+            ;
             $body.css("padding-top", $aside.hasClass("slideUp") ? 0 : $title.height());
-        }else{
+        } else {
             if ($body.hasClass("left-bottom")) {
-                $body.css("padding-left",0);
+                $body.css("padding-left", 0);
             } else {
                 width = $body.height() * 0.3;
                 $title.width(width);
-                $body.css("padding-left",width);
+                $body.css("padding-left", width);
             }
         }
     }
 })();
 
 
-function debounce(func,delay){
+function debounce(func, delay) {
     var lasttime = new Date();
 
-    return function(){
+    return function () {
         var now = new Date();
-        if(now - lasttime > delay){
+        if (now - lasttime > delay) {
             lasttime = now;
-            func.apply(this,arguments);
+            func.apply(this, arguments);
         }
 
     }
