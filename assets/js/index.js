@@ -332,7 +332,6 @@ $(window).on("popstate", function (e) {
 
     switch (Type = state.type) {
         case "article":
-            $body.removeClass("left-top left-middle").addClass("left-bottom");
             ATagClick(undefined, {action: Type, href: state.url});
             break;
         case "tag":
