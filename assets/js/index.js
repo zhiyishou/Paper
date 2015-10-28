@@ -409,6 +409,8 @@ function init() {
         initDuoshuo();
     }
 
+    //remove aside-init when the DOM is ready, so we can show a perfect page even the index.js is not loaded
+    $("#aside").removeClass("aside-init");
     doChanged();
     window.history.replaceState({type: Type, url: window.location.href}, document.title, window.location.href);
 }

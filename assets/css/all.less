@@ -519,6 +519,22 @@ h6 {
   }
 }
 
+.aside-init {
+  float: left;
+  position: static;
+
+  .title{
+    img,svg{
+      position: relative;
+      top: 5% !important;
+      bottom: auto;
+    }
+  }
+  .profile{
+    display: none;
+  }
+}
+
 .aside-close {
   transition-duration: 1s;
   -webkit-transition-duration: 1s;
@@ -1146,6 +1162,16 @@ h1.post-title {
       }
     }
 
+  }
+
+  .aside-init{
+    float: none;
+    .title{
+      img,svg{
+        top:auto;
+        left:auto;
+      }
+    }
   }
 
   .post-content{

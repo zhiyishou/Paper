@@ -434,6 +434,19 @@ h6 {
   color: #148afd;
   background: #ffffff;
 }
+.aside-init {
+  float: left;
+  position: static;
+}
+.aside-init .title img,
+.aside-init .title svg {
+  position: relative;
+  top: 5% !important;
+  bottom: auto;
+}
+.aside-init .profile {
+  display: none;
+}
 .aside-close {
   transition-duration: 1s;
   -webkit-transition-duration: 1s;
@@ -975,6 +988,14 @@ h1.post-title {
   .aside .profile > img {
     width: 100px;
     height: 100px;
+  }
+  .aside-init {
+    float: none;
+  }
+  .aside-init .title img,
+  .aside-init .title svg {
+    top: auto;
+    left: auto;
   }
   .post-content blockquote {
     margin: 0;
