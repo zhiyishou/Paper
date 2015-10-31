@@ -286,7 +286,7 @@ h6 {
         div {
           .tx(0);
         }
-        & ~ .contents .content {
+        & + .contents .content {
           .tx(0);
         }
       }
@@ -579,6 +579,23 @@ h6 {
       transform-origin: 0 50%;
       -webkit-transform-origin: 0 50%;
       background: @dark-blue;
+
+      &:hover{
+        .tf(rotateY(80deg));
+        transition-duration: 0.4s;
+        -webkit-transition-duration: 0.4s;
+
+        & + .contents{
+          transition-duration: 0.4s;
+          -webkit-transition-duration: 0.4s;
+          .tf(translate3d(-83px, 0, -98px) rotateY(-10deg));
+
+          .content{
+            transition-duration: 0.4s;
+            -webkit-transition-duration: 0.4s;
+          }
+        }
+      }
     }
 
     .contents {
@@ -633,10 +650,11 @@ h6 {
     &.hover {
       background: @dark-blue;
 
-      & ~ .contents {
+      & + .contents {
         .tf(rotateY(10deg));
 
         .content {
+          transition-timing-function: cubic-bezier(.28,.95,.6,1.28);
           .tx(-100%);
         }
       }

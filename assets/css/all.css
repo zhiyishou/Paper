@@ -236,7 +236,7 @@ h6 {
   -webkit-transform: translateX(0);
   transform: translateX(0);
 }
-#inner-body.right-middle .switch.hover ~ .contents .content {
+#inner-body.right-middle .switch.hover + .contents .content {
   -webkit-transform: translateX(0);
   transform: translateX(0);
 }
@@ -489,6 +489,22 @@ h6 {
   -webkit-transform-origin: 0 50%;
   background: #1478ea;
 }
+.aside-open + .container .switch:hover {
+  -webkit-transform: rotateY(80deg);
+  transform: rotateY(80deg);
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+}
+.aside-open + .container .switch:hover + .contents {
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -webkit-transform: translate3d(-83px, 0, -98px) rotateY(-10deg);
+  transform: translate3d(-83px, 0, -98px) rotateY(-10deg);
+}
+.aside-open + .container .switch:hover + .contents .content {
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+}
 .aside-open + .container .contents {
   -webkit-transform: translate3d(-50px, 0, -86px) rotateY(-10deg);
   transform: translate3d(-50px, 0, -86px) rotateY(-10deg);
@@ -540,11 +556,12 @@ h6 {
 .container .switch.hover {
   background: #1478ea;
 }
-.container .switch.hover ~ .contents {
+.container .switch.hover + .contents {
   -webkit-transform: rotateY(10deg);
   transform: rotateY(10deg);
 }
-.container .switch.hover ~ .contents .content {
+.container .switch.hover + .contents .content {
+  transition-timing-function: cubic-bezier(0.28, 0.95, 0.6, 1.28);
   -webkit-transform: translateX(-100%);
   transform: translateX(-100%);
 }
