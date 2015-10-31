@@ -26,8 +26,10 @@ $("#aside").on({
         !PhoneView && $(this).removeClass("aside-close").addClass("aside-open");
         $("#aside .profile").scrollTop(0);
     },
-    "mouseleave": function () {
-        !PhoneView && $(this).removeClass("aside-open").addClass("aside-close");
+    "mouseleave": function (e) {
+        if(!(e.relatedTarget && e.relatedTarget.id == "switch")){
+            !PhoneView && $(this).removeClass("aside-open").addClass("aside-close");
+        }
     },
     "click": function (e) {
         var $this = $(this);
@@ -45,10 +47,21 @@ $("#aside").on({
 
 $("#switch").on({
     "mouseenter": function () {
-        !PhoneView && $(this).addClass("hover");
+        if(!PhoneView) {
+            $(this).addClass("hover");
+            clearTimeout($(this).data("timeout"));
+        }
     },
-    "mouseleave": function () {
-        !PhoneView && $(this).removeClass("hover");
+    "mouseleave": function (e) {
+        if(!PhoneView) {
+            $(this).removeClass("hover");
+
+            if (!(e.relatedTarget && $(e.relatedTarget).parents().filter("#aside").length != 0)) {
+                $(this).data("timeout",setTimeout(function () {
+                    $("#aside").removeClass("aside-open").addClass("aside-close");
+                }, 300));
+            }
+        }
     },
     "click": function () {
         var $this = $(this);
