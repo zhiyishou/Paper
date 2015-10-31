@@ -112,10 +112,12 @@ function ATagClick(e, data) {
         return;
     }
 
-    if (!data && PhoneView && this.id == "readmore") {
+    if (this.id == "readmore") {
         $("#aside").removeClass("aside-open").addClass("aside-close");
         e.stopPropagation();
     }
+
+
 
     e && e.preventDefault();
     var href = isPopstate ? data.href : this.href;
