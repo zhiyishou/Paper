@@ -29,9 +29,7 @@
                             <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="YYYY.MM.DD"}}</time>
                         </div>
                         <div class="author">
-                            {{#if image}}
-                                <img src="{{image}}">
-                            {{/if}}
+                            <img src="{{@blog.logo}}">
                             <div>
                                 <h2>{{name}}/纸异兽</h2>
                                 {{#if bio}}<i>{{bio}}</i>{{/if}}
@@ -39,7 +37,6 @@
                         </div>
                     </a>
                 </section>
-
             {{/author}}
             <!-- 多说评论框 start -->
             <div id="ds-thread" data-thread-key="{{url}}" data-title="{{title}}" data-url="{{url}}"></div>
