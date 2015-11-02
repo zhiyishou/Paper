@@ -47,21 +47,10 @@ $("#aside").on({
 
 $("#switch").on({
     "mouseenter": function () {
-        if(!PhoneView) {
-            $(this).addClass("hover");
-            clearTimeout($(this).data("timeout"));
-        }
+        !PhoneView && $(this).addClass("hover");
     },
-    "mouseleave": function (e) {
-        if(!PhoneView) {
-            $(this).removeClass("hover");
-
-            if (!(e.relatedTarget && $(e.relatedTarget).parents().filter("#aside").length != 0)) {
-                $(this).data("timeout",setTimeout(function () {
-                    $("#aside").removeClass("aside-open").addClass("aside-close");
-                }, 300));
-            }
-        }
+    "mouseleave": function () {
+        !PhoneView && $(this).removeClass("hover") && $("#aside").removeClass("aside-open").addClass("aside-close");
     },
     "click": function () {
         var $this = $(this);
