@@ -481,8 +481,8 @@ h6 {
   transition: transform 0.5s 0.125s cubic-bezier(0.13, 1.1, 0.57, 1.17);
 }
 .aside-open + .container .switch {
-  transition-duration: 0.2s;
-  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
   -webkit-transform: rotateY(60deg);
   transform: rotateY(60deg);
   transform-origin: 0 50%;
@@ -490,20 +490,12 @@ h6 {
   background: #1478ea;
 }
 .aside-open + .container .switch:hover {
-  -webkit-transform: rotateY(80deg);
-  transform: rotateY(80deg);
-  transition-duration: 0.4s;
-  -webkit-transition-duration: 0.4s;
+  -webkit-transform: rotateY(30deg);
+  transform: rotateY(30deg);
 }
 .aside-open + .container .switch:hover + .contents {
-  transition-duration: 0.4s;
-  -webkit-transition-duration: 0.4s;
-  -webkit-transform: translate3d(-83px, 0, -98px) rotateY(-10deg);
-  transform: translate3d(-83px, 0, -98px) rotateY(-10deg);
-}
-.aside-open + .container .switch:hover + .contents .content {
-  transition-duration: 0.4s;
-  -webkit-transition-duration: 0.4s;
+  -webkit-transform: translate3d(-14px, 0, -50px) rotateY(-20deg);
+  transform: translate3d(-14px, 0, -50px) rotateY(-20deg);
 }
 .aside-open + .container .contents {
   -webkit-transform: translate3d(-50px, 0, -86px) rotateY(-10deg);
