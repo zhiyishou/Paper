@@ -45,87 +45,70 @@ nav.pagination:after {
 }
 @-webkit-keyframes crash-left {
   80% {
-    -webkit-transform: translateX(100px);
+    -webkit-transform: translateX(20px);
   }
   85% {
     -webkit-transform: translateX(0);
   }
   90% {
-    -webkit-transform: translateX(40px);
+    -webkit-transform: translateX(10px);
   }
   95% {
     -webkit-transform: translateX(0px);
   }
   100% {
-    -webkit-transform: translateX(20px);
+    -webkit-transform: translateX(5px);
   }
 }
 @keyframes crash-left {
   80% {
-    transform: translateX(100px);
+    transform: translateX(20px);
   }
   85% {
     transform: translateX(0);
   }
   90% {
-    transform: translateX(40px);
+    transform: translateX(10px);
   }
   95% {
     transform: translateX(0px);
   }
   100% {
-    transform: translateX(20px);
+    transform: translateX(5px);
   }
 }
 @-webkit-keyframes crash-right {
   80% {
-    -webkit-transform: translateX(-100px);
+    -webkit-transform: translateX(-20px);
   }
   85% {
     -webkit-transform: translateX(0);
   }
   90% {
-    -webkit-transform: translateX(-40px);
+    -webkit-transform: translateX(-10px);
   }
   95% {
     -webkit-transform: translateX(0px);
   }
   100% {
-    -webkit-transform: translateX(-20px);
-  }
-}
-@-webkit-keyframes crash-right {
-  80% {
-    -webkit-transform: translateX(-100px);
-  }
-  85% {
-    -webkit-transform: translateX(0);
-  }
-  90% {
-    -webkit-transform: translateX(-40px);
-  }
-  95% {
-    -webkit-transform: translateX(0px);
-  }
-  100% {
-    -webkit-transform: translateX(-20px);
+    -webkit-transform: translateX(-5px);
   }
 }
 @keyframes crash-right {
   80% {
-    transform: translateX(-100px);
+    transform: translateX(-20px);
   }
   85% {
     transform: translateX(0);
   }
   90% {
-    transform: translateX(-40px);
+    transform: translateX(-10px);
   }
   95% {
     transform: translateX(0px);
   }
   100% {
-    transform: translateX(-20px);
+    transform: translateX(-5px);
   }
 }
 @-webkit-keyframes crash-top {
