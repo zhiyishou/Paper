@@ -325,6 +325,27 @@ h6 {
   transition: transform 0.2s ease 1s;
   -webkit-transition: -webkit-transform 0.2s ease 1s;
 }
+.cover-bg {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url(https://dn-zhiyishou.qbox.me/image/9/b4/d5c36cee3272f8a4b9b954c97a7bd.jpg) #ffffff no-repeat;
+  background-size: auto 100%;
+  background-position-x: right;
+  z-index: -1;
+}
+.cover-bg:before {
+  content: "";
+  display: block;
+  width: 750px;
+  height: 100%;
+  margin: 0 auto;
+  background: white;
+  opacity: 0.6;
+}
 .post-content p,
 .post-content pre {
   margin: 0 0 30px;
@@ -646,13 +667,16 @@ h6 {
   -webkit-perspective: 1px;
   position: relative;
   overflow: hidden;
+  background: white;
+}
+.container .contents .cover-bg {
+  display: block;
 }
 .container .contents .content {
   width: 100%;
   height: 100%;
   overflow: auto;
   box-sizing: border-box;
-  background: #ffffff;
   transition-duration: 0.5s;
   -webkit-transition-duration: 0.5s;
   will-change: transform;
@@ -986,11 +1010,15 @@ h1.post-title {
     transform: none !important;
     -webkit-transform: none !important;
     transition: none !important;
-    -webkit-transition: none!important;
+    -webkit-transition: none !important;
   }
   body {
     overflow: auto;
     background: #ffffff;
+  }
+  body .cover-bg {
+    display: block;
+    position: fixed;
   }
   .aside {
     width: 100%;
@@ -1139,6 +1167,7 @@ h1.post-title {
     margin-left: 0;
     perspective: none;
     -webkit-perspective: none;
+    background: none;
     will-change: initial;
     height: auto;
   }
@@ -1169,6 +1198,10 @@ h1.post-title {
   }
   .container .contents {
     margin-left: 0;
+    background: none;
+  }
+  .container .contents .cover-bg {
+    display: none;
   }
   .container .contents .content {
     display: none;
