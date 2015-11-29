@@ -216,7 +216,7 @@ nav.pagination:after {
 html {
   width: 100%;
   height: 100%;
-  font: 400 18px/1.6 "Droid Serif", "Microsoft YaHei", Cambria, "Merriweather", "Lucida Grande", Verdana, Lucida, Arial, Helvetica, sans-serif, "宋体";
+  font: 400 18px/1.6 "Hiragino Sans GB", "Droid Serif", "Microsoft YaHei", Cambria, "Merriweather", "Lucida Grande", Verdana, Lucida, Arial, Helvetica, sans-serif, "宋体";
 }
 body {
   margin: 0;
