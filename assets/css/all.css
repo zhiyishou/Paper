@@ -1069,7 +1069,8 @@ h1.post-title {
   .aside .title svg {
     width: 20%;
     height: auto;
-    position: static;
+    position: relative;
+    top: 5px !important;
     left: auto;
     right: auto;
     display: inline-block;
