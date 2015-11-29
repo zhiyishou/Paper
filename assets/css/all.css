@@ -300,6 +300,12 @@ h6 {
   -webkit-transform: translateY(100%);
   transform: translateY(100%);
 }
+#inner-body.left-bottom .cover-bg:before {
+  opacity: 0.9;
+}
+#inner-body.left-bottom ~ .cover-bg:before {
+  opacity: 0.9;
+}
 #inner-body.left-bottom #left-bottom,
 #inner-body.left-bottom #left-middle {
   -webkit-transform: translateY(-100%);
