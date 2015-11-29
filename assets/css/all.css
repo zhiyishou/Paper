@@ -259,9 +259,6 @@ h6 {
   height: 100%;
   box-sizing: border-box;
 }
-#inner-body.right-middle {
-  background: #ff003f;
-}
 #inner-body.right-middle .aside {
   background: #ff003f;
 }
@@ -1023,7 +1020,7 @@ h1.post-title {
   .aside {
     width: 100%;
     height: auto;
-    z-index: 2;
+    z-index: 10;
   }
   .aside.aside-open {
     padding-right: 0;
@@ -1070,6 +1067,9 @@ h1.post-title {
     left: auto;
     right: auto;
     display: inline-block;
+  }
+  .aside .title svg {
+    display: inline !important;
   }
   .aside .profile {
     width: 100%;

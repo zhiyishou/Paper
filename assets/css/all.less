@@ -310,7 +310,6 @@ h6 {
   box-sizing: border-box;
 
   &.right-middle {
-    background: @main-red;
     .aside {
       background: @main-red;
       &.aside-open + .container .switch {
@@ -1200,7 +1199,7 @@ h1.post-title {
   .aside {
     width: 100%;
     height: auto;
-    z-index: 2;
+    z-index: 10;
 
     &.aside-open {
       padding-right: 0;
@@ -1246,6 +1245,9 @@ h1.post-title {
         left: auto;
         right: auto;
         display: inline-block;
+      }
+      svg{
+        display: inline !important;
       }
     }
 

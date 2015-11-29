@@ -447,7 +447,6 @@ var fixWidthOfAside = (function () {
     var isPhoneViewBefore = $("body").width() < 900,
         $aside = $("#aside"),
         $title = $aside.find(".title"),
-        $container = $("#container"),
         width;
 
     return function () {
@@ -467,8 +466,12 @@ var fixWidthOfAside = (function () {
             if (Type == "article") {
                 return $body.css("padding-top", 0)
             }
-            ;
             $body.css("padding-top", $aside.hasClass("slideUp") ? 0 : $title.height());
+
+            //fix for uc browser cause of the height of svg is zero
+            if($aside.find("svg").height() === 0){
+                $aside.find("svg").height(100)
+            }
         } else {
             if ($body.hasClass("left-bottom")) {
                 $body.css("padding-left", 0);
