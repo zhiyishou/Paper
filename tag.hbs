@@ -3,12 +3,11 @@
     {{> "nav"}}
     <main class="container" id="container">
         {{> "switch"}}
-        <a id="home-btn">HOME</a>
         <div class="contents">
             <!-- bg-->
             <div class="cover-bg"></div>
             <!--left start-->
-            <div class="content post-list" id="left-top">
+            <div class="content left-content post-list" id="left-top">
                 <header class="main-header tag-head" >
                     <div class="vertical">
                         <div class="main-header-content inner">
@@ -25,10 +24,11 @@
                 </header>
                 {{> "loop"}}
             </div>
-            <div class="content post-list" id="left-middle"></div>
-            <div class="content post-article" id="left-bottom"></div>
+            <div class="content left-content post-list" id="left-middle"></div>
+            <div class="content left-content post-article" id="left-bottom"></div>
             <!--left end-->
-            <div class="content post-list" id="right-middle"></div>
+            <div class="content right-content post-list" id="right-middle"></div>
         </div>
+        <a id="home-btn">HOME</a>
     </main>
 </div>

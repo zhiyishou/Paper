@@ -222,7 +222,6 @@ body {
   margin: 0;
   width: 100%;
   height: 100%;
-  background: #148afd;
   overflow: hidden;
 }
 a,
@@ -258,6 +257,10 @@ h6 {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  background: #148afd;
+}
+#inner-body.right-middle {
+  background: #ff003f;
 }
 #inner-body.right-middle .aside {
   background: #ff003f;
@@ -288,6 +291,9 @@ h6 {
   -webkit-transform: translateX(0);
   transform: translateX(0);
 }
+#inner-body.right-middle .switch.hover + .contents .content.left-content {
+  opacity: 1;
+}
 #inner-body.right-middle .switch div {
   -webkit-transform: translateX(-100px);
   transform: translateX(-100px);
@@ -295,6 +301,9 @@ h6 {
 #inner-body.right-middle .content {
   -webkit-transform: translateX(-100%);
   transform: translateX(-100%);
+}
+#inner-body.right-middle .content.left-content {
+  opacity: 0;
 }
 #inner-body.left-bottom .aside {
   -webkit-transform: translateY(100%);
@@ -635,6 +644,9 @@ h6 {
   transition-timing-function: cubic-bezier(0.28, 0.95, 0.6, 1.28);
   -webkit-transform: translateX(-100%);
   transform: translateX(-100%);
+}
+.container .switch.hover + .contents .content.left-content {
+  opacity: 0;
 }
 .container .switch.hover div {
   -webkit-transform: translateX(-100px);
@@ -1101,6 +1113,7 @@ h1.post-title {
   }
   #inner-body {
     height: auto;
+    background: none !important;
   }
   #inner-body.right-middle.left-bottom #home-btn,
   #inner-body.right-middle.left-top #home-btn {
