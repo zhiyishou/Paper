@@ -21,23 +21,23 @@
         <footer class="post-footer">
 
             {{! Everything inside the #author tags pulls data from the author }}
-            {{#author}}
                 <section class="post-info">
                     <a href="/about" action="article" class="white">
                         <div class="date-box">
                             <p>Published on</p>
                             <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="YYYY.MM.DD"}}</time>
                         </div>
-                        <div class="author">
-                            <img src="{{@blog.logo}}">
-                            <div>
-                                <h2>{{name}}/纸异兽</h2>
-                                {{#if bio}}<i>{{bio}}</i>{{/if}}
+                        {{#author}}
+                            <div class="author">
+                                <img src="{{@blog.logo}}">
+                                <div>
+                                    <h2>{{name}}/纸异兽</h2>
+                                    {{#if bio}}<i>{{bio}}</i>{{/if}}
+                                </div>
                             </div>
-                        </div>
+                        {{/author}}
                     </a>
                 </section>
-            {{/author}}
             <!-- 多说评论框 start -->
             <div id="ds-thread" data-thread-key="{{url}}" data-title="{{title}}" data-url="{{url}}"></div>
             <div id="comment-box" ></div>
