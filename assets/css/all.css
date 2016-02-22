@@ -344,7 +344,7 @@ h6 {
   position: absolute;
   top: 0;
   left: 0;
-  background: url(../img/aslmer.png) #ffffff no-repeat;
+  background: url(https://dn-zhiyishou.qbox.me/image/9/b4/d5c36cee3272f8a4b9b954c97a7bd.jpg) #ffffff no-repeat;
   background-size: auto 100%;
   background-position-x: right;
   z-index: -1;
@@ -760,11 +760,10 @@ h6 {
 #masker-close {
   position: fixed;
   right: 50px;
-  top: 50px;
+  top: 10px;
   font-size: 50px;
   color: #ffffff;
   cursor: pointer;
-  line-height: 50px;
 }
 #readmore {
   margin-top: 25px;
