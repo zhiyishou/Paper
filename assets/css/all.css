@@ -265,9 +265,6 @@ h6 {
 #inner-body.right-middle .aside {
   background: #ff003f;
 }
-#inner-body.right-middle .aside.aside-open + .container .switch {
-  background: #ec0038;
-}
 #inner-body.right-middle .aside .title {
   background: #ff003f;
 }
