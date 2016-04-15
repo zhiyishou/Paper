@@ -40,6 +40,7 @@
 !/default.hbs
 !/index.hbs
 !/page.hbs
+!/page-tech.hbs
 !/post.hbs
 !/tag.hbs
 
