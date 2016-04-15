@@ -281,7 +281,7 @@ h6 {
   background: #ff003f;
 }
 #inner-body.right-middle .switch.hover {
-  background: #ec0038;
+  background: #1478ea;
 }
 #inner-body.right-middle .switch.hover div {
   -webkit-transform: translateX(0);
@@ -582,12 +582,12 @@ h6 {
   transform: rotateY(30deg);
 }
 .aside-open + .container .switch:hover + .contents {
-  -webkit-transform: translate3d(-14px, 0, -50px) rotateY(-20deg);
-  transform: translate3d(-14px, 0, -50px) rotateY(-20deg);
+  -webkit-transform: translate3d(-14px, 0, -50px) rotateY(-20deg) !important;
+  transform: translate3d(-14px, 0, -50px) rotateY(-20deg) !important;
 }
 .aside-open + .container .contents {
-  -webkit-transform: translate3d(-50px, 0, -86px) rotateY(-10deg);
-  transform: translate3d(-50px, 0, -86px) rotateY(-10deg);
+  -webkit-transform: translate3d(-50px, 0, -86px) rotateY(-10deg) !important;
+  transform: translate3d(-50px, 0, -86px) rotateY(-10deg) !important;
 }
 .aside-open .title .title-first {
   -webkit-transform: translateX(100px);
@@ -634,7 +634,7 @@ h6 {
   overflow: hidden;
 }
 .container .switch.hover {
-  background: #1478ea;
+  background: #ec0038;
 }
 .container .switch.hover + .contents {
   -webkit-transform: rotateY(10deg);

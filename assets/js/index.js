@@ -23,14 +23,14 @@ $(function () {
 
 $("#aside").on({
     "mouseenter": function (e) {
-        !PhoneView && $(this).removeClass("aside-close").addClass("aside-open");
+        !PhoneView && $("#switch").addClass("hover") && $(this).removeClass("aside-close").addClass("aside-open");
         if(!e.relatedTarget || e.relatedTarget.id != "switch") {
             $("#aside .profile").scrollTop(0);
         }
     },
     "mouseleave": function (e) {
         if(!(e.relatedTarget && e.relatedTarget.id == "switch")){
-            !PhoneView && $(this).removeClass("aside-open").addClass("aside-close");
+            !PhoneView && $("#switch").removeClass("hover") && $(this).removeClass("aside-open").addClass("aside-close");
         }
     },
     "click": function (e) {

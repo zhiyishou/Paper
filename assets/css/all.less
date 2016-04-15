@@ -275,7 +275,7 @@ a, a:visited, a:link {
   text-decoration: none;
 }
 
-a.white, a.white:link, a.white:visited, {
+a.white, a.white:link, a.white:visited{
   color: @white;
 }
 
@@ -336,7 +336,7 @@ h6 {
     .switch {
       background: @main-red;
       &.hover {
-        background: @dark-red;
+        background: @dark-blue;
         div {
           .tx(0);
         }
@@ -681,13 +681,13 @@ h6 {
         .tf(rotateY(30deg));
 
         & + .contents {
-          .tf(translate3d(-14px, 0, -50px) rotateY(-20deg));
+          .tf(translate3d(-14px, 0, -50px) rotateY(-20deg)) !important;
         }
       }
     }
 
     .contents {
-      .tf(translate3d(-50px, 0, -86px) rotateY(-10deg));
+      .tf(translate3d(-50px, 0, -86px) rotateY(-10deg)) !important;
     }
   }
 
@@ -736,7 +736,7 @@ h6 {
     overflow: hidden;
 
     &.hover {
-      background: @dark-blue;
+      background: @dark-red;
 
       & + .contents {
         .tf(rotateY(10deg));
