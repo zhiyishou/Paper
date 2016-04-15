@@ -704,6 +704,9 @@ h6 {
   cursor: pointer;
   background: #16eacd;
 }
+#left-middle .post-header a {
+  color: #148afd;
+}
 #right-middle {
   position: absolute;
   left: 100%;
@@ -711,6 +714,7 @@ h6 {
 }
 #right-middle .post-header {
   border: 0;
+  color: #ff003f;
 }
 #right-middle > .article > div {
   width: 30%;
