@@ -1,5 +1,6 @@
 var $body = $("#inner-body"),
     Type,
+    tempAsideStore,
     PhoneView = false,
     currentPathname = "/",
     Title = "纸异兽",
@@ -67,11 +68,29 @@ $("#switch").on({
             //if isn't first click, add animation to this event
             if ($this.hasClass("hover")) {
                 setTimeout(function () {
-                    $body.toggleClass("right-middle");
+                    toggleClass();
                     $this.removeClass("hover");
                 }, 500);
             } else {
+                toggleClass();
+            }
+
+            function toggleClass(){
                 $body.toggleClass("right-middle");
+
+                if($body.hasClass("right-middle")){
+                    //in tech page
+                    tempAsideStore = {type: Type, url: window.location.href};
+                    window.history.pushState(tempAsideStore, Title, "/tech/");
+                    setTitle(Title);
+                }else if($body.hasClass("left-middle") || !$body.attr("class")){
+                    //in index page
+                    window.history.pushState({type: Type, url: window.location.href}, Title, "/");
+                }else if($body.hasClass("left-bottom") || $body.hasClass("left-top")){
+                    //in article page
+                    window.history.pushState({type: Type, url: window.location.href}, $(".left-bottom h1.post-title").text(), tempAsideStore.url);
+                    setTitle($(".left-bottom h1.post-title").text())
+                }
             }
         }
     }
@@ -116,9 +135,13 @@ function ATagClick(e, data) {
 
     maskLoding.show();
     switch (Type = action) {
+        case "tech":
+            $body.removeClass("left-top left-middle left-bottom").addClass("right-middle");
+            !isPopstate && window.history.pushState({type: action, url: href}, title, href);
+            break;
         case "article":
             $("#left-bottom").load(href + " #left-bottom>*", function () {
-                $body.removeClass("left-top left-middle").addClass("left-bottom");
+                $body.removeClass("left-top left-middle right-middle").addClass("left-bottom");
 
                 if (PhoneView) {
                     $("html,body").scrollTop(0);
@@ -136,7 +159,7 @@ function ATagClick(e, data) {
             break;
         case "tag":
             $("#left-top").load(href + " #left-top>*", function () {
-                $body.removeClass("left-bottom left-middle").addClass("left-top");
+                $body.removeClass("left-bottom left-middle right-middle").addClass("left-top");
                 PhoneView ? $("html,body").scrollTop(0) : $(this).scrollTop(0);
                 doChanged();
                 setTitle(title = $("h1.page-title").text());
@@ -146,7 +169,7 @@ function ATagClick(e, data) {
             break;
         case "page":
             $("#left-middle").load(href + " #left-middle>*", function () {
-                $body.removeClass("left-top left-bottom");
+                $body.removeClass("left-top left-bottom right-middle");
                 PhoneView ? $("html,body").scrollTop(0) : $(this).scrollTop(0);
                 doChanged();
                 setTitle(title);
@@ -335,9 +358,15 @@ $("#home-btn").click(function () {
 
 $(window).on("popstate", function (e) {
     var state = e.originalEvent.state;
+    console.log(state)
 
     switch (Type = state.type) {
+        case "tech":
+            setTitle(Title)
+            $body.removeClass("left-top left-middle left-bottom").addClass("right-middle");
+            break;
         case "article":
+            console.log(123);
             ATagClick(undefined, {action: Type, href: state.url});
             break;
         case "tag":
@@ -402,6 +431,9 @@ function init() {
 
     if (path == "/") {
         Type = "page";
+    } else if(path == "/tech/"){
+        setTitle(Title)
+        Type = "tech";
     } else if (path.indexOf("/tag/") == 0) {
         Type = "tag";
     } else if (path.indexOf("/page/") == 0) {
